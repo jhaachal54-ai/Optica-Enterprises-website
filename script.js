@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initContactForm();
   initScrollProgress();
+  /* ── Animation classes must be applied BEFORE initScrollReveal ── */
+  initColumnSlider();
+  initLayerTransform();
   initScrollReveal();
   initCounters();
   initParticles();
@@ -35,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductCompare();
   /* ── About / FAQ / Service pages ── */
   initFaqAccordion();
+  /* ── Animation suite ── */
+  initLightReveal();
 });
 
 function initScrollingQueue() {
@@ -256,8 +261,11 @@ function initScrollProgress() {
 }
 
 /* ── Scroll-reveal (fade-up on enter viewport) ─────────────────── */
+/* Also observes Columns Slider + Layer Transform classes          */
 function initScrollReveal() {
-  const els = document.querySelectorAll('.reveal');
+  const els = document.querySelectorAll(
+    '.reveal, .col-from-left, .col-from-right, .col-from-bottom, .layer-enter'
+  );
   if (!els.length) return;
 
   const observer = new IntersectionObserver((entries) => {
@@ -1040,5 +1048,76 @@ function initMapPulse() {
     const ring = document.createElement('span');
     ring.className = `map-pin-ring ring-${n}`;
     wrap.appendChild(ring);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ANIMATION SUITE
+══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Columns Slider — tags feature/service cards with
+         col-from-left / col-from-bottom / col-from-right
+         Must run BEFORE initScrollReveal() so the observer picks
+         up the new classes.                                      */
+function initColumnSlider() {
+  const dirs   = ['col-from-left', 'col-from-bottom', 'col-from-right'];
+  const delays = ['', 'col-delay-1', 'col-delay-2'];
+
+  function applySlider(cards) {
+    if (!cards.length) return;
+    cards.forEach((card, i) => {
+      const idx = i % 3;
+      // Remove existing reveal classes to prevent animation conflict
+      card.classList.remove('reveal', 'reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3');
+      card.classList.add(dirs[idx]);
+      if (delays[idx]) card.classList.add(delays[idx]);
+    });
+  }
+
+  // Home page "Why Choose Us" feature cards
+  // (only on home page — detected by the presence of .hero section)
+  if (document.querySelector('.hero')) {
+    applySlider(document.querySelectorAll('.features-grid .feature-card'));
+  }
+
+  // Service page service cards
+  applySlider(document.querySelectorAll('.service-grid .service-card'));
+}
+
+/* ── 2. Layer Transformation — replaces .reveal on timeline items
+         and enhances the existing product-card slide-in keyframes
+         (keyframes are redefined in CSS at the end of styles.css) */
+function initLayerTransform() {
+  // About page timeline — swap .reveal for .layer-enter
+  document.querySelectorAll('.tl-item').forEach(el => {
+    el.classList.remove('reveal');
+    el.classList.add('layer-enter');
+  });
+  // Product cards keep their existing .reveal + slide-in keyframe;
+  // the CSS redefines those keyframes to include scale(0.93) — no JS needed.
+}
+
+/* ── 3. Hover Light Reveal — tracks the cursor over catalogue cards
+         and brand cards, updating CSS custom properties used by a
+         radial-gradient hover background defined in styles.css.   */
+function initLightReveal() {
+  // Skip on touch-only devices
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  document.querySelectorAll('.cat-card, .brand-card').forEach(card => {
+    let raf;
+    card.addEventListener('mousemove', e => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--lr-x', ((e.clientX - r.left) / r.width  * 100) + '%');
+        card.style.setProperty('--lr-y', ((e.clientY - r.top)  / r.height * 100) + '%');
+      });
+    });
+    card.addEventListener('mouseleave', () => {
+      // Reset to centre so the gradient starts centred on next hover
+      card.style.setProperty('--lr-x', '50%');
+      card.style.setProperty('--lr-y', '50%');
+    });
   });
 }

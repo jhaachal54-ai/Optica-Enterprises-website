@@ -2593,3 +2593,109 @@ html, body { overflow-x: hidden; max-width: 100%; }
 @media (max-width: 640px) {
   .cmp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   ANIMATION SUITE
+   1. Layer Transformation  (product cards + about timeline)
+   2. Columns Slider        (home "Why Choose Us" + service grid)
+   3. Hover Light Reveal    (catalogue cards + brand cards)
+══════════════════════════════════════════════════════════════ */
+
+/* ── 1a. Layer Transform: enhanced product-card keyframes ─────── */
+/* Redefines the existing slide-in-* @keyframes to add depth scale */
+@keyframes slide-in-left {
+  0%   { opacity: 0; transform: translateX(-58px) scale(0.93); }
+  100% { opacity: 1; transform: translateX(0)     scale(1);    }
+}
+@keyframes slide-in-right {
+  0%   { opacity: 0; transform: translateX(58px)  scale(0.93); }
+  100% { opacity: 1; transform: translateX(0)     scale(1);    }
+}
+
+/* ── 1b. Layer Transform: .layer-enter class (timeline items) ─── */
+.layer-enter {
+  opacity: 0;
+  transform: scale(0.93) translateY(46px);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity   0.75s ease;
+}
+.layer-enter.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.layer-enter.reveal-delay-1 { transition-delay: 0.12s; }
+.layer-enter.reveal-delay-2 { transition-delay: 0.26s; }
+.layer-enter.reveal-delay-3 { transition-delay: 0.40s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .layer-enter               { transform: none; transition: opacity 0.4s ease; }
+  .layer-enter.visible       { transform: none; }
+}
+
+/* ── 2. Columns Slider ───────────────────────────────────────── */
+.col-from-left,
+.col-from-right,
+.col-from-bottom {
+  opacity: 0;
+  transition: transform 0.82s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity   0.72s ease;
+}
+.col-from-left   { transform: translateX(-82px) scale(0.95); }
+.col-from-right  { transform: translateX(82px)  scale(0.95); }
+.col-from-bottom { transform: translateY(82px)  scale(0.95); }
+
+.col-from-left.visible,
+.col-from-right.visible,
+.col-from-bottom.visible {
+  transform: none;
+  opacity: 1;
+}
+
+/* Stagger delays within each row of 3 */
+.col-delay-1 { transition-delay: 0.18s; }
+.col-delay-2 { transition-delay: 0.36s; }
+
+/* On narrow screens convert left/right into bottom slide */
+@media (max-width: 640px) {
+  .col-from-left:not(.visible)  { transform: translateY(62px) scale(0.96); }
+  .col-from-right:not(.visible) { transform: translateY(62px) scale(0.96); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .col-from-left, .col-from-right, .col-from-bottom {
+    transform: none; transition: opacity 0.4s ease;
+  }
+  .col-from-left.visible, .col-from-right.visible, .col-from-bottom.visible {
+    opacity: 1;
+  }
+}
+
+/* ── 3. Hover Light Reveal ────────────────────────────────────── */
+/* Catalogue cards */
+.cat-card {
+  --lr-x: 50%;
+  --lr-y: 50%;
+}
+.cat-card:hover {
+  background: radial-gradient(
+    290px circle at var(--lr-x) var(--lr-y),
+    rgba(76, 175, 80, 0.14) 0%,
+    rgba(76, 175, 80, 0.04) 48%,
+    var(--bg-card) 72%
+  ) !important;
+}
+
+/* Brand cards */
+.brand-card {
+  --lr-x: 50%;
+  --lr-y: 50%;
+}
+.brand-card:hover {
+  background: radial-gradient(
+    310px circle at var(--lr-x) var(--lr-y),
+    rgba(76, 175, 80, 0.12) 0%,
+    rgba(76, 175, 80, 0.03) 48%,
+    var(--bg-card) 72%
+  ) !important;
+}
