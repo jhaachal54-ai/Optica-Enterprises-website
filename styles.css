@@ -1010,8 +1010,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .footer-contact { text-align: left; }
   .footer-bottom  { flex-direction: column; align-items: flex-start; }
   .about-stats   { grid-template-columns: 1fr; }
-  .queue-card    { width: 230px; height: 240px; }
-  .queue-img     { width: 72px; height: 72px; font-size: 2rem; }
+  .queue-card       { width: 200px; height: 295px; }
+  .queue-real-img   { height: 130px; padding: 8px 10px 0; }
+  .queue-img        { width: 72px; height: 72px; font-size: 2rem; }
+  .queue-body       { padding: 12px 14px 10px; }
+  .queue-body h3    { font-size: 0.88rem; margin-bottom: 6px; }
+  .queue-body p     { font-size: 0.76rem; -webkit-line-clamp: 2; }
   /* header responsive */
   .header-inner  { height: 84px; }
   .brand-logo img { height: 56px; }
