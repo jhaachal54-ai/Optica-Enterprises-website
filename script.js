@@ -995,8 +995,8 @@ function initProductCompare() {
       </div>`;
 
     table.innerHTML =
-      row('Product',  selected.map(p => `<span class="cmp-cell cmp-prod-name">${p.name}</span>`)) +
-      row('Category', selected.map(p => `<span class="cmp-badge">${p.badge}</span>`)) +
+      row('Product',      selected.map(p => `<strong style="font-size:0.92rem;font-weight:800;color:var(--text-dark);line-height:1.45;word-break:break-word;display:block;">${p.name}</strong>`)) +
+      row('Category',     selected.map(p => `<span class="cmp-badge">${p.badge}</span>`)) +
       row('Key Features', selected.map(p => `<ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>`));
 
     document.getElementById('cmpModal').classList.add('cmp-modal-open');
