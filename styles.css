@@ -2429,18 +2429,32 @@ body {
   }
 }
 
-/* ── Category filter buttons — horizontal scroll on mobile ── */
+/* ── Category filter buttons — compact wrap on mobile ── */
 @media (max-width: 640px) {
   .cat-filter,
   .prod-filter-wrap.cat-filter {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: nowrap;
-    padding-bottom: 8px;
-    scrollbar-width: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: visible;
+    padding: 0 4px 4px;
+    margin-bottom: 36px;
   }
-  .cat-filter::-webkit-scrollbar,
-  .prod-filter-wrap.cat-filter::-webkit-scrollbar { display: none; }
+  .cat-filter .cat-btn,
+  .prod-filter-wrap .cat-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 7px 13px;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .cat-filter .cat-btn,
+  .prod-filter-wrap .cat-btn {
+    padding: 6px 11px;
+    font-size: 0.74rem;
+  }
 }
 
 /* ── About page stats: 4-col → 2-col on mobile ── */
