@@ -991,7 +991,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 108px; left: 0; right: 0;
+    top: 84px; left: 0; right: 0;
     background: rgba(7, 11, 7, 0.97);
     backdrop-filter: blur(24px);
     padding: 16px;
@@ -2396,3 +2396,200 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .err-title { font-size: 1.45rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; }
 .err-desc  { font-size: 0.94rem; color: var(--text-mid); max-width: 420px; line-height: 1.85; margin-bottom: 36px; }
 .err-links { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE OVERHAUL — Smartphone fixes
+══════════════════════════════════════════════════════════════ */
+
+/* Prevent horizontal overflow site-wide */
+html, body { overflow-x: hidden; max-width: 100%; }
+
+/* ── Condensed header nav position on mobile ── */
+@media (max-width: 640px) {
+  .site-header.condensed .main-nav { top: 70px; }
+}
+
+/* ── Footer nav links — wrap / grid on small screens ── */
+.footer-nav-links { flex-wrap: wrap; gap: 10px 16px; }
+@media (max-width: 480px) {
+  .footer-nav-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px 14px;
+  }
+}
+
+/* ── Category filter buttons — horizontal scroll on mobile ── */
+@media (max-width: 640px) {
+  .cat-filter,
+  .prod-filter-wrap.cat-filter {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .cat-filter::-webkit-scrollbar,
+  .prod-filter-wrap.cat-filter::-webkit-scrollbar { display: none; }
+}
+
+/* ── About page stats: 4-col → 2-col on mobile ── */
+@media (max-width: 640px) {
+  .about-stats[style] { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ── Search overlay padding on mobile ── */
+@media (max-width: 640px) {
+  .search-overlay { padding-top: 100px; }
+}
+@media (max-width: 400px) {
+  .search-overlay { padding-top: 88px; }
+  .search-input-wrap input { font-size: 1rem; }
+}
+
+/* ── Cookie banner stacks vertically on small screens ── */
+@media (max-width: 480px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .cookie-btns { width: 100%; justify-content: flex-end; }
+}
+
+/* ── Compare bar on mobile ── */
+@media (max-width: 640px) {
+  .compare-bar { padding: 10px 14px; gap: 8px; }
+  .cmp-bar-label { display: none; }
+  .compare-chip { max-width: 130px; font-size: 0.7rem; padding: 4px 8px; }
+}
+
+/* ── Compare modal on mobile ── */
+@media (max-width: 640px) {
+  .cmp-modal-overlay { padding: 12px 6px; align-items: flex-start; }
+  .cmp-modal { padding: 20px 12px; max-height: 92vh; overflow-y: auto; }
+  .cmp-modal-title { font-size: 1.05rem; }
+  .cmp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+/* ── Floating WA + back-to-top — smaller on narrow screens ── */
+@media (max-width: 480px) {
+  .wa-float { bottom: 72px; right: 14px; width: 46px; height: 46px; }
+  .wa-float svg { width: 24px; height: 24px; }
+  .back-to-top { bottom: 18px; right: 14px; width: 40px; height: 40px; font-size: 1rem; }
+}
+
+/* ── Hero fonts on very small screens ── */
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.85rem; letter-spacing: -0.5px; line-height: 1.2; }
+  .hero p   { font-size: 0.95rem; margin: 0 auto 28px; }
+  .hero-btns { flex-direction: column; align-items: center; gap: 12px; }
+  .hero-btns .btn { width: 100%; max-width: 280px; justify-content: center; }
+}
+
+/* ── Page-hero section on mobile ── */
+@media (max-width: 640px) {
+  .page-hero { padding: 56px 0 48px; }
+  .page-hero h1 { font-size: 1.9rem; }
+  .page-hero p  { font-size: 0.92rem; }
+}
+@media (max-width: 480px) {
+  .page-hero { padding: 44px 0 36px; }
+  .page-hero h1 { font-size: 1.65rem; }
+}
+
+/* ── Section headings on mobile ── */
+@media (max-width: 480px) {
+  .section-header h2 { font-size: 1.6rem; }
+  .section { padding: 56px 0; }
+}
+
+/* ── Container padding on very small screens ── */
+@media (max-width: 400px) {
+  .container { padding: 0 14px; }
+}
+
+/* ── Brand featured card — single column on mobile ── */
+@media (max-width: 640px) {
+  .brand-featured .brand-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* ── About timeline on small screens ── */
+@media (max-width: 480px) {
+  .about-timeline { padding-left: 42px; }
+  .tl-dot { left: -38px; width: 28px; height: 28px; font-size: 0.75rem; }
+}
+
+/* ── Values / service / step grids — single column on very small ── */
+@media (max-width: 480px) {
+  .values-grid   { grid-template-columns: 1fr; }
+  .service-grid  { grid-template-columns: 1fr; }
+  .steps-list    { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Catalogue grid — single column on very small screens ── */
+@media (max-width: 400px) {
+  .catalogue-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── Compare button on product cards ── */
+@media (max-width: 640px) {
+  .compare-btn {
+    top: 10px; right: 10px;
+    padding: 4px 9px 4px 7px;
+    font-size: 0.68rem;
+  }
+}
+
+/* ── Products grid — single col on very small ── */
+@media (max-width: 400px) {
+  .products-list { grid-template-columns: 1fr !important; }
+}
+
+/* ── About grid (story section) — stack on mobile ── */
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-visual { display: none; }
+}
+
+/* ── Logo pulse wrapper centre on mobile ── */
+@media (max-width: 640px) {
+  .logo-pulse-wrapper { transform: scale(0.75); }
+}
+
+/* ── CTA band padding on mobile ── */
+@media (max-width: 480px) {
+  .cta-band { padding: 56px 0; }
+  .cta-band h2 { font-size: 1.6rem; }
+  .cta-band p  { font-size: 0.92rem; }
+  .cta-band .hero-btns { flex-direction: column; align-items: center; gap: 12px; }
+  .cta-band .btn { width: 100%; max-width: 280px; justify-content: center; }
+}
+
+/* ── Brand cards grid on mobile ── */
+@media (max-width: 640px) {
+  .brands-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Stat cards layout on mobile ── */
+@media (max-width: 480px) {
+  .stat-card { padding: 24px 16px; }
+  .stat-number { font-size: 2.2rem; }
+}
+
+/* ── 404 page error links wrap on mobile ── */
+@media (max-width: 480px) {
+  .err-links { flex-direction: column; align-items: center; }
+  .err-links .btn { width: 100%; max-width: 280px; justify-content: center; }
+}
+
+/* ── Table / cmp-table horizontal scroll on mobile ── */
+@media (max-width: 640px) {
+  .cmp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
