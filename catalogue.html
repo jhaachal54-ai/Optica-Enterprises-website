@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue Library — Optica Enterprises</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<!-- ════════════════════════════ HEADER ════════════════════════════ -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <img src="Optica%20Enterprises%20Logo.png?v=2" alt="Optica Enterprises Logo" />
+        </div>
+        <div class="brand-text">
+          <div class="company-name">Optica Enterprises</div>
+          <div class="company-tagline">Diagnostic Devices</div>
+        </div>
+      </div>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html"     class="nav-link">Home</a>
+        <a href="products.html"  class="nav-link">Products</a>
+        <a href="brands.html"    class="nav-link">Brands</a>
+        <a href="catalogue.html" class="nav-link active">Catalogue</a>
+        <a href="contact.html"   class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════ PAGE HERO ════════════════════════════ -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Catalogue Library</h1>
+    <p>Download detailed product brochures and technical specifications for every instrument we supply.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════ CATALOGUE ════════════════════════════ -->
+<section class="section">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Product Brochures</span>
+      <h2>All Product Catalogues</h2>
+      <p>Filter by category and download the brochure you need — free, instant access.</p>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="cat-filter reveal reveal-delay-1">
+      <button class="cat-btn active" data-cat="all">All &nbsp;<span class="cat-count">15</span></button>
+      <button class="cat-btn" data-cat="hematology">Hematology</button>
+      <button class="cat-btn" data-cat="chemistry">Chemistry</button>
+      <button class="cat-btn" data-cat="immunoassay">Immunoassay</button>
+      <button class="cat-btn" data-cat="coagulation">Coagulation</button>
+      <button class="cat-btn" data-cat="specialty">Specialty</button>
+    </div>
+
+    <div class="catalogue-grid" id="catalogueGrid">
+
+      <!-- 1. EXIAS E1 -->
+      <div class="cat-card reveal" data-category="specialty">
+        <div class="cat-img-wrap">
+          <img src="product-images/exias-e1.png" alt="EXIAS E1" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Electrolyte Analysis</span>
+          <h3>EXIAS E1 Electrolyte Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/EXIAS-E1-Electrolyte-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#exias-e1" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Getein 1100 -->
+      <div class="cat-card reveal reveal-delay-1" data-category="immunoassay">
+        <div class="cat-img-wrap">
+          <img src="product-images/getein-1100.png" alt="Getein 1100" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Immunofluorescence</span>
+          <h3>Getein 1100 Immunofluorescence Quantitative Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Getein-1100-Immunofluorescence-Quantitative-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#getein-1100" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Mispa CLOG -->
+      <div class="cat-card reveal reveal-delay-2" data-category="coagulation">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-clog.png" alt="Mispa CLOG" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Hemostasis</span>
+          <h3>Mispa CLOG Smart Hemostasis Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-CLOG-Smart-Hemostasis-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-clog" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Mispa CXL Pro Plus -->
+      <div class="cat-card reveal" data-category="chemistry">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-cxl.png" alt="Mispa CXL Pro Plus" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Clinical Chemistry</span>
+          <h3>Mispa CXL Pro Plus Clinical Chemistry Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-CXL-Pro-Plus-random-Access-Clinical-Chdemistry-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-cxl" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Mispa Count X -->
+      <div class="cat-card reveal reveal-delay-1" data-category="hematology">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-count-x.png" alt="Mispa Count X" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Hematology</span>
+          <h3>Mispa Count X Auto Hematology Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-Count-X-Auto-Hematalogy-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-count-x" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Mispa FAB 120 -->
+      <div class="cat-card reveal reveal-delay-2" data-category="chemistry">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-fab120.png" alt="Mispa FAB 120" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Clinical Chemistry</span>
+          <h3>Mispa FAB 120 Fully Automatic Clinical Chemistry Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-FAB-120-Fully-Automatic-Clinical-Chemistry-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-fab120" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Mispa HX50 -->
+      <div class="cat-card reveal" data-category="hematology">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-hx50.png" alt="Mispa HX50" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Hematology</span>
+          <h3>Mispa HX50 Automatic 5-Part Hematology Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-HX50-Automatic-5-Part-Hematology-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-hx50" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Mispa Maestro -->
+      <div class="cat-card reveal reveal-delay-1" data-category="specialty">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-maestro.png" alt="Mispa Maestro" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">HbA1c / Glycohemoglobin</span>
+          <h3>Mispa Maestro Automated Glycohemoglobin Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-Maestro.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-maestro" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Mispa Plus -->
+      <div class="cat-card reveal reveal-delay-2" data-category="chemistry">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-plus.png" alt="Mispa Plus" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Biochemistry</span>
+          <h3>Mispa Plus Advanced Semi-Automated Biochemistry Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-Plus-Advanced-Semi-Automated-Biochemistry-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-plus" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Mispa REVO -->
+      <div class="cat-card reveal" data-category="immunoassay">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-revo.png" alt="Mispa REVO" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Immunoassay</span>
+          <h3>Mispa REVO Dry Immunoassay Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-REVO-Dry-Immunoassay-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-revo" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Mispa VIVA -->
+      <div class="cat-card reveal reveal-delay-1" data-category="chemistry">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-viva.png" alt="Mispa VIVA" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Clinical Chemistry</span>
+          <h3>Mispa VIVA Semi-Automated Clinical Chemistry Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-VIVA-Semi-Automated-Clinical-Chemistry-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-viva" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. Mispa i3 -->
+      <div class="cat-card reveal reveal-delay-2" data-category="specialty">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-i3.png" alt="Mispa i3" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Specific Proteins</span>
+          <h3>Mispa i3 Automated Specific Protein Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-i3-Automated-Cartridge-Based-Specific-Protein-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-i3" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. Mispa nano Plus -->
+      <div class="cat-card reveal" data-category="chemistry">
+        <div class="cat-img-wrap">
+          <img src="product-images/mispa-nano.png" alt="Mispa nano Plus" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Clinical Chemistry</span>
+          <h3>Mispa nano Plus Fully Automatic Clinical Chemistry Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Mispa-nano-Plus-Fully-Automatic-Clinical-Chemistry-Analyzer.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#mispa-nano" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. OPTI CCA TS 2 -->
+      <div class="cat-card reveal reveal-delay-1" data-category="specialty">
+        <div class="cat-img-wrap">
+          <img src="product-images/opti-cca.png" alt="OPTI CCA TS 2" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Critical Care</span>
+          <h3>OPTI CCA TS 2 Critical Care Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/OPTI-CCA-TS-2.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#opti-cca" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. Wondfo OCG-102 -->
+      <div class="cat-card reveal reveal-delay-2" data-category="coagulation">
+        <div class="cat-img-wrap">
+          <img src="product-images/wondfo-ocg.png" alt="Wondfo OCG-102" class="cat-img" />
+        </div>
+        <div class="cat-body">
+          <span class="prod-badge">Coagulation</span>
+          <h3>Wondfo OCG-102 Optical Coagulation Analyzer</h3>
+          <div class="cat-actions">
+            <a href="Catalogue/Wondfo-Optical-Coagulation-Analyzer-OCG-102.pdf" class="btn btn-download" target="_blank" rel="noopener">⬇ Download PDF</a>
+            <a href="products.html#wondfo-ocg" class="btn btn-ghost">View Product</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.catalogue-grid -->
+  </div>
+</section>
+
+<!-- ════════════════════════════ CTA ════════════════════════════ -->
+<section class="cta-band">
+  <div class="container">
+    <h2 class="reveal">Need a Product Demonstration?</h2>
+    <p class="reveal reveal-delay-1">Contact our specialists to arrange a live demo at your facility — free of charge.</p>
+    <div class="hero-btns reveal reveal-delay-2">
+      <a href="contact.html" class="btn btn-primary">Request a Demo</a>
+      <a href="products.html" class="btn btn-outline">Browse Products</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-company-name">Optica Enterprises</div>
+        <div class="footer-sub">Diagnostic Devices</div>
+      </div>
+      <div class="footer-contact">
+        <p>Reach Us</p>
+        <a href="tel:+917678273175">+91 76782 73175</a>
+        <a href="tel:+919910063557">+91 99100 63557</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Optica Enterprises. All rights reserved.</span>
+      <div class="footer-nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="brands.html">Brands</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

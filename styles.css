@@ -1631,3 +1631,322 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .map-pin-ring { animation: none !important; }
   .form-group label { transition: none !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   CATALOGUE LIBRARY PAGE
+══════════════════════════════════════════════════════════════ */
+
+/* ── Category filter bar ────────────────────────────────────── */
+.cat-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 52px;
+}
+.cat-btn {
+  padding: 9px 22px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-mid);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+  font-family: inherit;
+}
+.cat-btn:hover,
+.cat-btn.active {
+  background: var(--green-pale);
+  border-color: rgba(76, 175, 80, 0.42);
+  color: var(--green-light);
+  box-shadow: var(--glow-sm);
+}
+.cat-count {
+  display: inline-block;
+  background: rgba(76, 175, 80, 0.15);
+  border-radius: 100px;
+  padding: 1px 8px;
+  font-size: 0.78rem;
+  margin-left: 4px;
+}
+
+/* ── Catalogue grid ─────────────────────────────────────────── */
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.cat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.35s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.cat-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.cat-card:hover::after { opacity: 1; }
+.cat-card:hover {
+  border-color: rgba(76, 175, 80, 0.38);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-7px);
+}
+.cat-img-wrap {
+  height: 190px;
+  background: #0a110a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.cat-img {
+  max-height: 150px;
+  width: 100%;
+  object-fit: contain;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.50));
+}
+.cat-card:hover .cat-img {
+  transform: scale(1.09) translateY(-5px);
+  filter: drop-shadow(0 10px 28px rgba(0,0,0,0.60)) drop-shadow(0 0 14px rgba(76,175,80,0.15));
+}
+.cat-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.cat-body h3 {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 10px 0 20px;
+  line-height: 1.42;
+  flex: 1;
+}
+.cat-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+/* Hidden card when filter is active */
+.cat-card.cat-hidden {
+  display: none;
+}
+
+@media (max-width: 960px) { .catalogue-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) {
+  .catalogue-grid { grid-template-columns: 1fr; }
+  .cat-filter { gap: 8px; }
+  .cat-btn { padding: 7px 16px; font-size: 0.82rem; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BRANDS / PARTNERS PAGE
+══════════════════════════════════════════════════════════════ */
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+/* Agappe featured card spans full width */
+.brand-card.brand-featured { grid-column: 1 / -1; }
+
+.brand-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: var(--shadow);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.brand-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--brand-accent, var(--green)) 40%, var(--brand-accent, var(--green)) 60%, transparent 100%);
+  opacity: 0.75;
+}
+.brand-card:hover {
+  border-color: rgba(76, 175, 80, 0.35);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-6px);
+}
+
+/* Featured layout — side-by-side on wide screens */
+.brand-featured .brand-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.brand-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Monogram circle */
+.brand-monogram {
+  width: 84px; height: 84px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -1px;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+.brand-featured .brand-monogram {
+  width: 108px; height: 108px;
+  border-radius: 28px;
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+/* Monogram colours */
+.mono-green  { background: linear-gradient(135deg,#1B5E20,#43A047); box-shadow: 0 0 32px rgba(76,175,80,0.35); }
+.mono-teal   { background: linear-gradient(135deg,#004D40,#00897B); box-shadow: 0 0 32px rgba(0,137,123,0.30); }
+.mono-purple { background: linear-gradient(135deg,#4A148C,#7B1FA2); box-shadow: 0 0 32px rgba(123,31,162,0.28); }
+.mono-orange { background: linear-gradient(135deg,#BF360C,#E64A19); box-shadow: 0 0 32px rgba(230,74,25,0.28); }
+.mono-indigo { background: linear-gradient(135deg,#1A237E,#303F9F); box-shadow: 0 0 32px rgba(48,63,159,0.28); }
+
+.brand-origin {
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  margin-bottom: 8px;
+}
+.brand-name {
+  font-size: 1.72rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  line-height: 1.18;
+  margin-bottom: 5px;
+}
+.brand-featured .brand-name { font-size: 2.1rem; }
+.brand-tagline {
+  font-size: 0.88rem;
+  color: var(--green-mid);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.brand-desc {
+  font-size: 0.93rem;
+  color: var(--text-mid);
+  line-height: 1.88;
+  margin-bottom: 20px;
+}
+.brand-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 26px;
+}
+.brand-tag {
+  padding: 4px 13px;
+  border: 1px solid rgba(76, 175, 80, 0.22);
+  border-radius: 100px;
+  font-size: 0.76rem;
+  color: var(--text-mid);
+  font-weight: 500;
+  background: rgba(76, 175, 80, 0.04);
+}
+.brand-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 22px;
+  margin-top: 4px;
+}
+.brand-product-count {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  letter-spacing: 0.4px;
+}
+.brand-product-count strong {
+  color: var(--green-mid);
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-right: 3px;
+}
+
+@media (max-width: 860px) {
+  .brands-grid { grid-template-columns: 1fr; }
+  .brand-card.brand-featured { grid-column: auto; }
+  .brand-featured .brand-inner { grid-template-columns: 1fr; }
+  .brand-card { padding: 28px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LIQUID BUTTONS
+   An irregular rotating blob rises from below each button on
+   hover — the spinning uneven edges look like liquid filling
+   a vessel. overflow:hidden on .btn clips it perfectly.
+══════════════════════════════════════════════════════════════ */
+
+@keyframes liquid-spin {
+  from { transform: translateX(-50%) rotate(0deg);   }
+  to   { transform: translateX(-50%) rotate(360deg); }
+}
+
+/* ── The blob ── */
+.btn::before {
+  content: '';
+  position: absolute;
+  bottom: -200%;          /* fully below button at rest       */
+  left: 50%;
+  width: 220%;
+  height: 200%;
+  /* Deliberately uneven border-radius → looks like liquid when rotating */
+  border-radius: 42% 58% 44% 56% / 40% 44% 56% 60%;
+  transition: bottom 0.80s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: liquid-spin 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Rise on hover — blob enters the button from the bottom */
+.btn:hover::before { bottom: -20%; }
+
+/* ── Liquid colour per variant ── */
+.btn-green::before    { background: rgba(255, 255, 255, 0.18); }
+.btn-primary::before  { background: rgba(76,  175,  80, 0.22); }
+.btn-outline::before  { background: rgba(255, 255, 255, 0.16); }
+.btn-ghost::before    { background: rgba(76,  175,  80, 0.28); }
+.btn-download::before { background: rgba(255, 255, 255, 0.18); }
+
+/* ── Reduced motion — disable liquid ── */
+@media (prefers-reduced-motion: reduce) {
+  .btn::before {
+    animation: none !important;
+    bottom: -200% !important;
+    transition: none !important;
+  }
+}

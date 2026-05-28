@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFeatListReveal();
   initFormLabelHighlight();
   initMapPulse();
+  /* ── Catalogue page ── */
+  initCatalogueFilter();
 });
 
 function initScrollingQueue() {
@@ -620,6 +622,26 @@ function initFormLabelHighlight() {
     if (!field || !label) return;
     field.addEventListener('focus', () => label.classList.add('label-active'));
     field.addEventListener('blur',  () => label.classList.remove('label-active'));
+  });
+}
+
+/* ── Catalogue category filter ─────────────────────────────────── */
+function initCatalogueFilter() {
+  const btns  = document.querySelectorAll('.cat-btn');
+  const cards = document.querySelectorAll('.cat-card');
+  if (!btns.length) return;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cat = btn.dataset.cat;
+      cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.category === cat;
+        card.classList.toggle('cat-hidden', !match);
+      });
+    });
   });
 }
 
