@@ -2302,7 +2302,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
    AFTER-SALES SERVICE PAGE
 ══════════════════════════════════════════════════════════════ */
 .service-grid {
-  display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; margin-top: 6px;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 6px;
 }
 .service-card {
   background: var(--bg-card); border: 1px solid var(--border);
@@ -2316,6 +2316,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .service-icon { font-size: 2.3rem; display: block; margin-bottom: 16px; }
 .service-card h3 { font-size: 1.12rem; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
 .service-card p { font-size: 0.87rem; color: var(--text-mid); line-height: 1.85; }
+@media (max-width: 900px) { .service-grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 640px) { .service-grid { grid-template-columns: 1fr; } }
 
 .steps-list {
@@ -2402,8 +2403,16 @@ textarea.form-control { resize: vertical; min-height: 130px; }
    MOBILE RESPONSIVE OVERHAUL — Smartphone fixes
 ══════════════════════════════════════════════════════════════ */
 
-/* Prevent horizontal overflow site-wide */
-html, body { overflow-x: hidden; max-width: 100%; }
+/* Prevent horizontal overflow + lock scrollbar width so header never jitters */
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+  scrollbar-gutter: stable;      /* reserves scrollbar lane on non-scrolling pages */
+}
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 /* ── Condensed header nav position on mobile ── */
 @media (max-width: 640px) {
@@ -2596,41 +2605,45 @@ html, body { overflow-x: hidden; max-width: 100%; }
 
 
 /* ══════════════════════════════════════════════════════════════
-   ANIMATION SUITE
+   ANIMATION SUITE  v2  — bigger, cleaner, clearly visible
    1. Layer Transformation  (product cards + about timeline)
    2. Columns Slider        (home "Why Choose Us" + service grid)
    3. Hover Light Reveal    (catalogue cards + brand cards)
 ══════════════════════════════════════════════════════════════ */
 
-/* ── 1a. Layer Transform: enhanced product-card keyframes ─────── */
-/* Redefines the existing slide-in-* @keyframes to add depth scale */
+/* ── 1a. Layer Transform: product-card keyframes (redefined stronger) */
 @keyframes slide-in-left {
-  0%   { opacity: 0; transform: translateX(-58px) scale(0.93); }
-  100% { opacity: 1; transform: translateX(0)     scale(1);    }
+  0%   { opacity: 0; transform: translateX(-110px) scale(0.80) rotateY(6deg); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateX(0)      scale(1)    rotateY(0deg); }
 }
 @keyframes slide-in-right {
-  0%   { opacity: 0; transform: translateX(58px)  scale(0.93); }
-  100% { opacity: 1; transform: translateX(0)     scale(1);    }
+  0%   { opacity: 0; transform: translateX(110px)  scale(0.80) rotateY(-6deg); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateX(0)      scale(1)    rotateY(0deg);  }
 }
+/* Extend the slide-in duration to make it clearly visible */
+.product-card.reveal.visible         { animation-duration: 0.95s; }
+.product-card.reverse.reveal.visible { animation-duration: 0.95s; }
 
-/* ── 1b. Layer Transform: .layer-enter class (timeline items) ─── */
+/* ── 1b. Layer Transform: .layer-enter (about timeline items) ─── */
 .layer-enter {
   opacity: 0;
-  transform: scale(0.93) translateY(46px);
-  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity   0.75s ease;
+  transform: scale(0.78) translateY(80px);
+  transition: transform 1.0s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity   0.85s ease;
 }
 .layer-enter.visible {
   opacity: 1;
   transform: scale(1) translateY(0);
 }
-.layer-enter.reveal-delay-1 { transition-delay: 0.12s; }
-.layer-enter.reveal-delay-2 { transition-delay: 0.26s; }
-.layer-enter.reveal-delay-3 { transition-delay: 0.40s; }
+.layer-enter.reveal-delay-1 { transition-delay: 0.14s; }
+.layer-enter.reveal-delay-2 { transition-delay: 0.28s; }
+.layer-enter.reveal-delay-3 { transition-delay: 0.44s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .layer-enter               { transform: none; transition: opacity 0.4s ease; }
-  .layer-enter.visible       { transform: none; }
+  .layer-enter         { transform: none; transition: opacity 0.4s ease; }
+  .layer-enter.visible { transform: none; }
 }
 
 /* ── 2. Columns Slider ───────────────────────────────────────── */
@@ -2638,28 +2651,44 @@ html, body { overflow-x: hidden; max-width: 100%; }
 .col-from-right,
 .col-from-bottom {
   opacity: 0;
-  transition: transform 0.82s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity   0.72s ease;
+  transition: transform 0.90s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity   0.80s ease;
 }
-.col-from-left   { transform: translateX(-82px) scale(0.95); }
-.col-from-right  { transform: translateX(82px)  scale(0.95); }
-.col-from-bottom { transform: translateY(82px)  scale(0.95); }
+/* Big, unmistakable directional slides */
+.col-from-left   { transform: translateX(-140px) scale(0.80); }
+.col-from-right  { transform: translateX(140px)  scale(0.80); }
+.col-from-bottom { transform: translateY(120px)  scale(0.80); }
 
 .col-from-left.visible,
 .col-from-right.visible,
 .col-from-bottom.visible {
-  transform: none;
+  transform: translateX(0) scale(1); /* explicit so hover can override */
   opacity: 1;
 }
 
 /* Stagger delays within each row of 3 */
-.col-delay-1 { transition-delay: 0.18s; }
-.col-delay-2 { transition-delay: 0.36s; }
+.col-delay-1 { transition-delay: 0.20s; }
+.col-delay-2 { transition-delay: 0.40s; }
 
-/* On narrow screens convert left/right into bottom slide */
+/* On narrow screens, left/right become bottom slides */
 @media (max-width: 640px) {
-  .col-from-left:not(.visible)  { transform: translateY(62px) scale(0.96); }
-  .col-from-right:not(.visible) { transform: translateY(62px) scale(0.96); }
+  .col-from-left:not(.visible)  { transform: translateY(80px) scale(0.82); }
+  .col-from-right:not(.visible) { transform: translateY(80px) scale(0.82); }
+}
+
+/* ── Hover-transform restore after col-slider animation ──────── */
+/* Specificity fix: ensure :hover transforms win over .visible state.
+   feature-card and service-card both lift on hover, but .col-from-*.visible
+   has equal specificity to :hover — this rule (3 classes + pseudo) beats both. */
+.feature-card.col-from-left.visible:hover,
+.feature-card.col-from-right.visible:hover,
+.feature-card.col-from-bottom.visible:hover {
+  transform: translateY(-7px) !important;
+}
+.service-card.col-from-left.visible:hover,
+.service-card.col-from-right.visible:hover,
+.service-card.col-from-bottom.visible:hover {
+  transform: translateY(-5px) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2671,18 +2700,20 @@ html, body { overflow-x: hidden; max-width: 100%; }
   }
 }
 
-/* ── 3. Hover Light Reveal ────────────────────────────────────── */
+/* ── 3. Hover Light Reveal — catalogue & brand cards ──────────── */
 /* Catalogue cards */
 .cat-card {
   --lr-x: 50%;
   --lr-y: 50%;
+  transition: background 0.15s ease, border-color 0.35s ease,
+              box-shadow 0.35s ease, transform 0.35s ease;
 }
 .cat-card:hover {
   background: radial-gradient(
-    290px circle at var(--lr-x) var(--lr-y),
-    rgba(76, 175, 80, 0.14) 0%,
-    rgba(76, 175, 80, 0.04) 48%,
-    var(--bg-card) 72%
+    380px circle at var(--lr-x) var(--lr-y),
+    rgba(76, 175, 80, 0.26) 0%,
+    rgba(76, 175, 80, 0.10) 40%,
+    var(--bg-card) 68%
   ) !important;
 }
 
@@ -2693,9 +2724,9 @@ html, body { overflow-x: hidden; max-width: 100%; }
 }
 .brand-card:hover {
   background: radial-gradient(
-    310px circle at var(--lr-x) var(--lr-y),
-    rgba(76, 175, 80, 0.12) 0%,
-    rgba(76, 175, 80, 0.03) 48%,
-    var(--bg-card) 72%
+    420px circle at var(--lr-x) var(--lr-y),
+    rgba(76, 175, 80, 0.22) 0%,
+    rgba(76, 175, 80, 0.08) 40%,
+    var(--bg-card) 68%
   ) !important;
 }

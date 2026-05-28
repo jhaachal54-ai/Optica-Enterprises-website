@@ -1,10 +1,14 @@
+# Serve About Us at the root URL
 [[redirects]]
   from   = "/"
   to     = "/about.html"
   status = 302
   force  = true
 
+# Explicitly pin index.html so Netlify's /index.html→/ normalisation
+# does NOT chain into the above redirect, keeping Home reachable.
 [[redirects]]
-  from   = "/*"
-  to     = "/404.html"
-  status = 404
+  from   = "/index.html"
+  to     = "/index.html"
+  status = 200
+  force  = true
