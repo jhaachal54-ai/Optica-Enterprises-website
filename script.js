@@ -24,6 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initMapPulse();
   /* ── Catalogue page ── */
   initCatalogueFilter();
+  /* ── Global UI ── */
+  initSplashScreen();
+  initWhatsAppFloat();
+  initBackToTop();
+  initCookieBanner();
+  initSearchBar();
+  /* ── Products page ── */
+  initProductFilter();
+  initProductCompare();
+  /* ── About / FAQ / Service pages ── */
+  initFaqAccordion();
 });
 
 function initScrollingQueue() {
@@ -641,6 +652,374 @@ function initCatalogueFilter() {
         const match = cat === 'all' || card.dataset.category === cat;
         card.classList.toggle('cat-hidden', !match);
       });
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PRODUCT DATA — used by Search & Compare
+══════════════════════════════════════════════════════════════ */
+const PRODUCT_DATA = [
+  { id: 'exias-e1',     name: 'EXIAS E1 Electrolyte Analyzer',                      category: 'Electrolyte',    keywords: 'ISE sodium potassium chloride pH Hct electrolyte' },
+  { id: 'getein-1100',  name: 'Getein 1100 Immunofluorescence Analyzer',             category: 'Immunoassay',    keywords: 'cardiac thyroid fertility tumor bone fluorescence' },
+  { id: 'mispa-clog',   name: 'Mispa CLOG Smart Hemostasis Analyzer',                category: 'Coagulation',    keywords: 'PT APTT TT fibrinogen coagulation hemostasis clot' },
+  { id: 'mispa-cxl',    name: 'Mispa CXL Pro Plus Clinical Chemistry Analyzer',      category: 'Chemistry',      keywords: 'biochemistry liver kidney lipid random access 240' },
+  { id: 'mispa-count-x',name: 'Mispa Count X Auto Hematology Analyzer',             category: 'Hematology',     keywords: 'CBC 21 parameters WBC differential blood count 60' },
+  { id: 'mispa-fab120', name: 'Mispa FAB 120 Clinical Chemistry Analyzer',           category: 'Chemistry',      keywords: 'chemistry 120 tests ISE electrolyte biochemistry' },
+  { id: 'mispa-hx50',   name: 'Mispa HX50 Automatic 5-Part Hematology Analyzer',    category: 'Hematology',     keywords: '5-part differential laser fluorescence reticulocyte' },
+  { id: 'mispa-maestro',name: 'Mispa Maestro Automated HbA1c Analyzer',             category: 'HbA1c',          keywords: 'HbA1c glycohemoglobin diabetes HPLC 72 seconds' },
+  { id: 'mispa-plus',   name: 'Mispa Plus Semi-Automated Biochemistry Analyzer',     category: 'Chemistry',      keywords: 'semi-automated biochemistry penta lens photometry' },
+  { id: 'mispa-revo',   name: 'Mispa REVO Dry Immunoassay Analyzer',                category: 'Immunoassay',    keywords: 'TRFIA fluorescence cartridge thyroid cardiac' },
+  { id: 'mispa-viva',   name: 'Mispa VIVA Semi-Automated Chemistry Analyzer',       category: 'Chemistry',      keywords: 'semi-auto chemistry ERA flow cell pH urine CSF' },
+  { id: 'mispa-i3',     name: 'Mispa i3 Specific Protein Analyzer',                 category: 'Specific Protein',keywords: 'CRP ASO RF IgA IgG IgM nephelometry turbidimetry' },
+  { id: 'mispa-nano',   name: 'Mispa nano Plus Fully Automatic Chemistry Analyzer',  category: 'Chemistry',      keywords: 'fully automatic 360 tests refrigeration compact' },
+  { id: 'opti-cca',     name: 'OPTI CCA TS 2 Critical Care Analyzer',               category: 'Critical Care',  keywords: 'blood gas pH pCO2 pO2 electrolytes bedside ICU' },
+  { id: 'wondfo-ocg',   name: 'Wondfo Optical Coagulation Analyzer OCG-102',        category: 'Coagulation',    keywords: 'coagulation PT APTT fibrinogen ACT portable' },
+];
+
+/* ══════════════════════════════════════════════════════════════
+   LOADING SPLASH SCREEN
+══════════════════════════════════════════════════════════════ */
+function initSplashScreen() {
+  // Show only once per browser session (not on every page change)
+  if (sessionStorage.getItem('splashShown')) return;
+  sessionStorage.setItem('splashShown', '1');
+
+  const splash = document.createElement('div');
+  splash.id = 'splash-screen';
+  splash.innerHTML = `
+    <img src="Optica%20Enterprises%20Logo.png?v=2" alt="Optica Enterprises" />
+    <div class="splash-spinner"></div>
+  `;
+  document.body.prepend(splash);
+
+  const exit = () => {
+    splash.classList.add('splash-out');
+    setTimeout(() => splash.remove(), 650);
+  };
+
+  // Show for at least 1.3s, or until all resources load — whichever is later
+  const minWait = new Promise(r => setTimeout(r, 1300));
+  const loaded  = new Promise(r => {
+    if (document.readyState === 'complete') r();
+    else window.addEventListener('load', r, { once: true });
+  });
+  Promise.all([minWait, loaded]).then(exit);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   WHATSAPP FLOATING BUTTON
+══════════════════════════════════════════════════════════════ */
+function initWhatsAppFloat() {
+  const wa = document.createElement('a');
+  wa.className = 'wa-float';
+  wa.href = 'https://wa.me/917678273175';
+  wa.target = '_blank';
+  wa.rel = 'noopener noreferrer';
+  wa.setAttribute('aria-label', 'Chat with us on WhatsApp');
+  wa.innerHTML = `
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15
+               -.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475
+               -.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52
+               .149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207
+               -.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372
+               -.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2
+               5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085
+               1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.14 1.544 5.875L.057 23.57a.75.75
+               0 00.918.93l5.941-1.524A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0
+               22a9.95 9.95 0 01-5.093-1.396l-.364-.217-3.527.905.94-3.42-.237-.375A9.953 9.953 0
+               012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+    <span class="wa-tooltip">Chat on WhatsApp</span>
+  `;
+  document.body.appendChild(wa);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BACK-TO-TOP BUTTON
+══════════════════════════════════════════════════════════════ */
+function initBackToTop() {
+  const btn = document.createElement('button');
+  btn.className = 'back-to-top';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.textContent = '↑';
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('btt-visible', window.scrollY > 320);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   COOKIE / PRIVACY BANNER
+══════════════════════════════════════════════════════════════ */
+function initCookieBanner() {
+  if (localStorage.getItem('cookieChoice')) return;
+
+  const banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.id = 'cookieBanner';
+  banner.innerHTML = `
+    <p class="cookie-text">
+      We use cookies to improve your browsing experience and analyse site traffic.
+      By clicking <strong>Accept</strong> you consent to our use of cookies.
+      <a href="contact.html">Privacy Policy</a>
+    </p>
+    <div class="cookie-btns">
+      <button class="btn btn-primary" id="cookieAccept" style="padding:9px 22px;font-size:0.84rem;">Accept</button>
+      <button class="btn btn-ghost"   id="cookieDecline" style="padding:9px 18px;font-size:0.84rem;">Decline</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  // Small delay so slide-up animation is visible
+  setTimeout(() => banner.classList.add('cookie-visible'), 600);
+
+  const dismiss = choice => {
+    localStorage.setItem('cookieChoice', choice);
+    banner.classList.remove('cookie-visible');
+    setTimeout(() => banner.remove(), 500);
+  };
+
+  document.getElementById('cookieAccept') .addEventListener('click', () => dismiss('accepted'));
+  document.getElementById('cookieDecline').addEventListener('click', () => dismiss('declined'));
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SEARCH OVERLAY
+══════════════════════════════════════════════════════════════ */
+function initSearchBar() {
+  const navToggle = document.getElementById('navToggle');
+  if (!navToggle) return;
+
+  // Inject search icon into header
+  const toggle = document.createElement('button');
+  toggle.className = 'search-toggle';
+  toggle.setAttribute('aria-label', 'Search products');
+  toggle.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`;
+  navToggle.parentNode.insertBefore(toggle, navToggle);
+
+  // Inject search overlay into body
+  const overlay = document.createElement('div');
+  overlay.className = 'search-overlay';
+  overlay.id = 'searchOverlay';
+  overlay.innerHTML = `
+    <div class="search-input-wrap">
+      <input type="search" class="search-input" id="searchInput" placeholder="Search products, categories…" autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" id="searchClose" aria-label="Close search">✕</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">Type to search across all 15 products</p>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  // Open / close
+  const open  = () => { overlay.classList.add('search-open'); document.getElementById('searchInput').focus(); };
+  const close = () => { overlay.classList.remove('search-open'); document.getElementById('searchInput').value = ''; document.getElementById('searchResults').innerHTML = '<p class="search-hint">Type to search across all 15 products</p>'; };
+
+  toggle.addEventListener('click', open);
+  document.getElementById('searchClose').addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+
+  // Search logic
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const q = this.value.trim().toLowerCase();
+    const results = document.getElementById('searchResults');
+    if (!q) {
+      results.innerHTML = '<p class="search-hint">Type to search across all 15 products</p>';
+      return;
+    }
+    const matches = PRODUCT_DATA.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      p.keywords.toLowerCase().includes(q)
+    );
+    if (!matches.length) {
+      results.innerHTML = `<p class="search-empty">No results for "<strong>${q}</strong>"</p>`;
+      return;
+    }
+    results.innerHTML = matches.map(p => `
+      <a href="products.html#${p.id}" class="search-result-item" onclick="document.getElementById('searchOverlay').classList.remove('search-open')">
+        <span class="search-result-badge">${p.category}</span>
+        <span class="search-result-name">${p.name}</span>
+      </a>
+    `).join('');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PRODUCT CATEGORY FILTER  (products.html)
+══════════════════════════════════════════════════════════════ */
+function initProductFilter() {
+  const btns  = document.querySelectorAll('[data-prod-cat]');
+  const cards = document.querySelectorAll('.product-card[data-category]');
+  if (!btns.length || !cards.length) return;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.prodCat;
+      cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.category === cat;
+        card.classList.toggle('prod-hidden', !match);
+      });
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PRODUCT COMPARISON TOOL  (products.html)
+══════════════════════════════════════════════════════════════ */
+function initProductCompare() {
+  const prodList = document.querySelector('.products-list');
+  if (!prodList) return;
+
+  const MAX = 3;
+  let selected = []; // [{id, name, badge, features}]
+
+  // ── Inject Compare bar ──
+  const bar = document.createElement('div');
+  bar.className = 'compare-bar';
+  bar.id = 'cmpBar';
+  bar.innerHTML = `
+    <span class="cmp-bar-label">Comparing:</span>
+    <div class="compare-chips" id="cmpChips"></div>
+    <button class="btn btn-primary" id="cmpNowBtn" style="padding:9px 24px;font-size:0.84rem;flex-shrink:0;">Compare Now</button>
+    <button class="cmp-clear-btn" id="cmpClearBtn">Clear All</button>
+  `;
+  document.body.appendChild(bar);
+
+  // ── Inject Compare modal ──
+  const modal = document.createElement('div');
+  modal.className = 'cmp-modal-overlay';
+  modal.id = 'cmpModal';
+  modal.innerHTML = `
+    <div class="cmp-modal">
+      <div class="cmp-modal-head">
+        <span class="cmp-modal-title">Product Comparison</span>
+        <button class="cmp-modal-close" id="cmpModalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="cmp-grid-wrap">
+        <div class="cmp-table" id="cmpTable"></div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // ── Inject Compare buttons on each product card ──
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.style.position = 'relative';
+    const id       = card.id;
+    const name     = card.querySelector('h2')?.textContent?.trim() || 'Product';
+    const badge    = card.querySelector('.prod-badge')?.textContent?.trim() || '';
+    const features = [...card.querySelectorAll('.feat-list li')].map(li => li.textContent.trim());
+
+    const btn = document.createElement('button');
+    btn.className = 'compare-btn';
+    btn.dataset.cmpId = id;
+    btn.innerHTML = `<span class="cmp-icon">⊕</span> Compare`;
+    card.appendChild(btn);
+
+    btn.addEventListener('click', () => {
+      const idx = selected.findIndex(p => p.id === id);
+      if (idx > -1) {
+        selected.splice(idx, 1);
+        btn.classList.remove('cmp-selected');
+        btn.innerHTML = `<span class="cmp-icon">⊕</span> Compare`;
+      } else {
+        if (selected.length >= MAX) {
+          btn.animate([{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(-4px)'},{transform:'translateX(0)'}], {duration:300});
+          return;
+        }
+        selected.push({ id, name, badge, features });
+        btn.classList.add('cmp-selected');
+        btn.innerHTML = `<span class="cmp-icon">✓</span> Added`;
+      }
+      refreshBar();
+    });
+  });
+
+  // ── Refresh bar ──
+  function refreshBar() {
+    const chips = document.getElementById('cmpChips');
+    chips.innerHTML = selected.map(p => `
+      <span class="compare-chip" data-cmp-chip="${p.id}">
+        <span>${p.name.length > 28 ? p.name.slice(0,28)+'…' : p.name}</span>
+        <button class="cmp-chip-remove" onclick="window._cmpRemove('${p.id}')" aria-label="Remove">×</button>
+      </span>
+    `).join('');
+    document.getElementById('cmpBar').classList.toggle('cmp-bar-visible', selected.length > 0);
+  }
+
+  // Global helper for inline onclick in chips
+  window._cmpRemove = id => {
+    selected = selected.filter(p => p.id !== id);
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      if (btn.dataset.cmpId === id) {
+        btn.classList.remove('cmp-selected');
+        btn.innerHTML = `<span class="cmp-icon">⊕</span> Compare`;
+      }
+    });
+    refreshBar();
+  };
+
+  document.getElementById('cmpClearBtn').addEventListener('click', () => {
+    selected = [];
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.classList.remove('cmp-selected');
+      btn.innerHTML = `<span class="cmp-icon">⊕</span> Compare`;
+    });
+    refreshBar();
+  });
+
+  // ── Open modal ──
+  document.getElementById('cmpNowBtn').addEventListener('click', () => {
+    if (selected.length < 2) return;
+    const cols  = selected.length;
+    const colCSS = `grid-template-columns: 130px repeat(${cols}, 1fr)`;
+    const table = document.getElementById('cmpTable');
+
+    const row = (label, cells) => `
+      <div class="cmp-row" style="${colCSS}">
+        <div class="cmp-cell cmp-label">${label}</div>
+        ${cells.map(c => `<div class="cmp-cell">${c}</div>`).join('')}
+      </div>`;
+
+    table.innerHTML =
+      row('Product',  selected.map(p => `<span class="cmp-cell cmp-prod-name">${p.name}</span>`)) +
+      row('Category', selected.map(p => `<span class="cmp-badge">${p.badge}</span>`)) +
+      row('Key Features', selected.map(p => `<ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>`));
+
+    document.getElementById('cmpModal').classList.add('cmp-modal-open');
+  });
+
+  const closeModal = () => document.getElementById('cmpModal').classList.remove('cmp-modal-open');
+  document.getElementById('cmpModalClose').addEventListener('click', closeModal);
+  document.getElementById('cmpModal').addEventListener('click', e => { if (e.target.id === 'cmpModal') closeModal(); });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FAQ ACCORDION  (faq.html)
+══════════════════════════════════════════════════════════════ */
+function initFaqAccordion() {
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn  = item.querySelector('.faq-q');
+    const body = item.querySelector('.faq-body');
+    if (!btn || !body) return;
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('faq-open');
+      // Close all
+      document.querySelectorAll('.faq-item.faq-open').forEach(el => el.classList.remove('faq-open'));
+      if (!isOpen) item.classList.add('faq-open');
     });
   });
 }

@@ -27,6 +27,7 @@
         <a href="products.html"  class="nav-link active">Products</a>
         <a href="brands.html"    class="nav-link">Brands</a>
         <a href="catalogue.html" class="nav-link">Catalogue</a>
+        <a href="about.html"     class="nav-link">About</a>
         <a href="contact.html"   class="nav-link">Contact</a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
@@ -45,10 +46,21 @@
 <!-- ════════════════════════════ PRODUCTS ════════════════════════════ -->
 <section class="section">
   <div class="container">
+
+    <!-- Category Filter -->
+    <div class="prod-filter-wrap cat-filter reveal">
+      <button class="cat-btn active" data-prod-cat="all">All &nbsp;<span class="cat-count">15</span></button>
+      <button class="cat-btn" data-prod-cat="hematology">Hematology</button>
+      <button class="cat-btn" data-prod-cat="chemistry">Chemistry</button>
+      <button class="cat-btn" data-prod-cat="immunoassay">Immunoassay</button>
+      <button class="cat-btn" data-prod-cat="coagulation">Coagulation</button>
+      <button class="cat-btn" data-prod-cat="specialty">Specialty</button>
+    </div>
+
     <div class="products-list">
 
 <!-- 2. EXIAS E1 -->
-      <div class="product-card reverse reveal" id="exias-e1">
+      <div class="product-card reverse reveal" id="exias-e1" data-category="specialty">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/exias-e1.png" alt="EXIAS E1 Electrolyte Analyzer" class="prod-real-img" />
         </div>
@@ -79,7 +91,7 @@
       </div>
 
       <!-- 3. Getein 1100 -->
-      <div class="product-card reveal" id="getein-1100">
+      <div class="product-card reveal" id="getein-1100" data-category="immunoassay">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/getein-1100.png" alt="Getein 1100 Immunofluorescence Quantitative Analyzer" class="prod-real-img" />
         </div>
@@ -110,7 +122,7 @@
       </div>
 
       <!-- 4. Mispa CLOG -->
-      <div class="product-card reverse reveal" id="mispa-clog">
+      <div class="product-card reverse reveal" id="mispa-clog" data-category="coagulation">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-clog.png" alt="Mispa CLOG Smart Hemostasis Analyzer" class="prod-real-img" />
         </div>
@@ -141,7 +153,7 @@
       </div>
 
       <!-- 5. Mispa CXL Pro Plus -->
-      <div class="product-card reveal" id="mispa-cxl">
+      <div class="product-card reveal" id="mispa-cxl" data-category="chemistry">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-cxl.png" alt="Mispa CXL Pro Plus Clinical Chemistry Analyzer" class="prod-real-img" />
         </div>
@@ -172,7 +184,7 @@
       </div>
 
       <!-- 6. Mispa Count X -->
-      <div class="product-card reverse reveal" id="mispa-count-x">
+      <div class="product-card reverse reveal" id="mispa-count-x" data-category="hematology">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-count-x.png" alt="Mispa Count X Auto Hematology Analyzer" class="prod-real-img" />
         </div>
@@ -203,7 +215,7 @@
       </div>
 
       <!-- 7. Mispa FAB 120 -->
-      <div class="product-card reveal" id="mispa-fab120">
+      <div class="product-card reveal" id="mispa-fab120" data-category="chemistry">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-fab120.png" alt="Mispa FAB 120 Fully Automatic Clinical Chemistry Analyzer" class="prod-real-img" />
         </div>
@@ -234,7 +246,7 @@
       </div>
 
       <!-- 8. Mispa HX50 -->
-      <div class="product-card reverse reveal" id="mispa-hx50">
+      <div class="product-card reverse reveal" id="mispa-hx50" data-category="hematology">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-hx50.png" alt="Mispa HX50 Automatic 5-Part Hematology Analyzer" class="prod-real-img" />
         </div>
@@ -265,7 +277,7 @@
       </div>
 
       <!-- 9. Mispa Maestro -->
-      <div class="product-card reveal" id="mispa-maestro">
+      <div class="product-card reveal" id="mispa-maestro" data-category="specialty">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-maestro.png" alt="Mispa Maestro Automated HbA1c Analyzer" class="prod-real-img" />
         </div>
@@ -296,7 +308,7 @@
       </div>
 
       <!-- 10. Mispa Plus -->
-      <div class="product-card reverse reveal" id="mispa-plus">
+      <div class="product-card reverse reveal" id="mispa-plus" data-category="chemistry">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-plus.png" alt="Mispa Plus Advanced Semi-Automated Biochemistry Analyzer" class="prod-real-img" />
         </div>
@@ -327,7 +339,7 @@
       </div>
 
       <!-- 11. Mispa REVO -->
-      <div class="product-card reveal" id="mispa-revo">
+      <div class="product-card reveal" id="mispa-revo" data-category="immunoassay">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-revo.png" alt="Mispa REVO Dry Immunoassay Analyzer" class="prod-real-img" />
         </div>
@@ -358,7 +370,7 @@
       </div>
 
       <!-- 12. Mispa VIVA -->
-      <div class="product-card reverse reveal" id="mispa-viva">
+      <div class="product-card reverse reveal" id="mispa-viva" data-category="chemistry">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-viva.png" alt="Mispa VIVA Semi-Automated Clinical Chemistry Analyzer" class="prod-real-img" />
         </div>
@@ -389,7 +401,7 @@
       </div>
 
       <!-- 13. Mispa i3 -->
-      <div class="product-card reveal" id="mispa-i3">
+      <div class="product-card reveal" id="mispa-i3" data-category="specialty">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-i3.png" alt="Mispa i3 Specific Protein Analyzer" class="prod-real-img" />
         </div>
@@ -420,7 +432,7 @@
       </div>
 
       <!-- 14. Mispa nano Plus -->
-      <div class="product-card reverse reveal" id="mispa-nano">
+      <div class="product-card reverse reveal" id="mispa-nano" data-category="chemistry">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/mispa-nano.png" alt="Mispa nano Plus Fully Automatic Clinical Chemistry Analyzer" class="prod-real-img" />
         </div>
@@ -451,7 +463,7 @@
       </div>
 
       <!-- 15. OPTI CCA TS 2 -->
-      <div class="product-card reveal" id="opti-cca">
+      <div class="product-card reveal" id="opti-cca" data-category="specialty">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/opti-cca.png" alt="OPTI CCA TS 2 Critical Care Analyzer" class="prod-real-img" />
         </div>
@@ -482,7 +494,7 @@
       </div>
 
       <!-- 16. Wondfo OCG-102 -->
-      <div class="product-card reverse reveal" id="wondfo-ocg">
+      <div class="product-card reverse reveal" id="wondfo-ocg" data-category="coagulation">
         <div class="prod-img-col prod-img-real">
           <img src="product-images/wondfo-ocg.png" alt="Wondfo Optical Coagulation Analyzer OCG-102" class="prod-real-img" />
         </div>
@@ -548,6 +560,9 @@
         <a href="products.html">Products</a>
         <a href="brands.html">Brands</a>
         <a href="catalogue.html">Catalogue</a>
+        <a href="about.html">About</a>
+        <a href="service.html">Service</a>
+        <a href="faq.html">FAQ</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
