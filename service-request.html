@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Request — Optica Enterprises</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <img src="Optica%20Enterprises%20Logo.png?v=2" alt="Optica Enterprises Logo" />
+        </div>
+        <div class="brand-text">
+          <div class="company-name">Optica Enterprises</div>
+          <div class="company-tagline">Diagnostic Devices</div>
+        </div>
+      </div>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html"     class="nav-link">About Us</a>
+        <a href="home.html"      class="nav-link">Home</a>
+        <a href="products.html"  class="nav-link">Products</a>
+        <a href="brands.html"    class="nav-link">Brands</a>
+        <a href="catalogue.html" class="nav-link">Catalogue</a>
+        <a href="contact.html"   class="nav-link active">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Service Request</h1>
+    <p>Log a breakdown, schedule maintenance, or request calibration. Our team responds within the same business day.</p>
+  </div>
+</section>
+
+<!-- RESPONSE INFO -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">⚡</div>
+        <h3>Same-Day Response</h3>
+        <p>All service requests are acknowledged on the same business day. Urgent breakdowns receive priority handling.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">📞</div>
+        <h3>Remote First</h3>
+        <p>Our engineer first attempts remote diagnosis by phone or WhatsApp to resolve the issue without waiting for a site visit.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">🔧</div>
+        <h3>On-Site Within 24–48 hrs</h3>
+        <p>When a site visit is needed, we aim to attend within 24–48 hours and carry commonly required spare parts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="section">
+  <div class="container">
+    <div class="sr-form-wrap">
+      <div class="section-header reveal" style="text-align:left;align-items:flex-start;">
+        <span class="section-eyebrow">Log a Request</span>
+        <h2>Service Request Form</h2>
+        <p>Fill in the details below and our service team will be in touch promptly.</p>
+      </div>
+
+      <form class="sr-form reveal" id="serviceRequestForm" novalidate>
+
+        <!-- SECTION A: Client Info -->
+        <div class="sr-section">
+          <div class="sr-section-title">A &nbsp;—&nbsp; Your Details</div>
+          <div class="sr-grid">
+            <div class="form-group">
+              <input type="text" id="sr-name" name="name" required placeholder=" " />
+              <label for="sr-name">Full Name *</label>
+            </div>
+            <div class="form-group">
+              <input type="text" id="sr-org" name="organisation" required placeholder=" " />
+              <label for="sr-org">Organisation / Lab Name *</label>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="sr-phone" name="phone" required placeholder=" " />
+              <label for="sr-phone">Contact Number *</label>
+            </div>
+            <div class="form-group">
+              <input type="email" id="sr-email" name="email" placeholder=" " />
+              <label for="sr-email">Email Address</label>
+            </div>
+            <div class="form-group sr-full">
+              <input type="text" id="sr-addr" name="address" placeholder=" " />
+              <label for="sr-addr">Site Address / Location</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION B: Instrument Details -->
+        <div class="sr-section">
+          <div class="sr-section-title">B &nbsp;—&nbsp; Instrument Details</div>
+          <div class="sr-grid">
+            <div class="form-group">
+              <select id="sr-model" name="model" required class="sr-select">
+                <option value="" disabled selected>Select instrument model</option>
+                <optgroup label="Hematology">
+                  <option>Mispa Count X</option>
+                  <option>Mispa HX50</option>
+                </optgroup>
+                <optgroup label="Clinical Chemistry">
+                  <option>Mispa VIVA</option>
+                  <option>Mispa Plus</option>
+                  <option>Mispa FAB 120</option>
+                  <option>Mispa CXL Pro Plus</option>
+                  <option>Mispa nano Plus</option>
+                </optgroup>
+                <optgroup label="Immunoassay">
+                  <option>Mispa REVO</option>
+                  <option>Getein 1100</option>
+                </optgroup>
+                <optgroup label="Coagulation">
+                  <option>Mispa CLOG</option>
+                  <option>Wondfo OCG-102</option>
+                </optgroup>
+                <optgroup label="Specialty">
+                  <option>Mispa Maestro (HbA1c)</option>
+                  <option>Mispa i3 (Specific Proteins)</option>
+                  <option>EXIAS E1 (Electrolytes)</option>
+                  <option>OPTI CCA TS 2 (Blood Gas)</option>
+                </optgroup>
+                <option value="other">Other / Not Listed</option>
+              </select>
+              <label for="sr-model" class="sr-select-label">Instrument Model *</label>
+            </div>
+            <div class="form-group">
+              <input type="text" id="sr-serial" name="serial" placeholder=" " />
+              <label for="sr-serial">Serial Number (if known)</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION C: Issue Details -->
+        <div class="sr-section">
+          <div class="sr-section-title">C &nbsp;—&nbsp; Issue Details</div>
+          <div class="sr-grid">
+            <div class="form-group">
+              <select id="sr-type" name="issueType" required class="sr-select">
+                <option value="" disabled selected>Select request type</option>
+                <option>Breakdown — Instrument not working</option>
+                <option>Breakdown — Error code / alarm</option>
+                <option>Quality issue — Results out of range</option>
+                <option>Scheduled Preventive Maintenance</option>
+                <option>Calibration &amp; Verification</option>
+                <option>Operator Training / Refresher</option>
+                <option>LIS / Connectivity Issue</option>
+                <option>Consumable / Reagent Query</option>
+                <option>Other</option>
+              </select>
+              <label for="sr-type" class="sr-select-label">Request Type *</label>
+            </div>
+            <div class="form-group">
+              <select id="sr-urgency" name="urgency" class="sr-select">
+                <option value="" disabled selected>Select urgency level</option>
+                <option value="urgent">🔴 Urgent — instrument down, cannot work</option>
+                <option value="high">🟠 High — instrument working but with errors</option>
+                <option value="standard">🟡 Standard — planned / non-critical</option>
+                <option value="low">🟢 Low — routine / when convenient</option>
+              </select>
+              <label for="sr-urgency" class="sr-select-label">Urgency Level</label>
+            </div>
+            <div class="form-group sr-full">
+              <textarea id="sr-desc" name="description" rows="5" required placeholder=" "></textarea>
+              <label for="sr-desc">Describe the Issue *</label>
+              <span class="form-hint">Include any error codes, when the issue started, and what you have already tried.</span>
+            </div>
+            <div class="form-group sr-full">
+              <textarea id="sr-avail" name="availability" rows="2" placeholder=" "></textarea>
+              <label for="sr-avail">Preferred Visit Time / Availability</label>
+              <span class="form-hint">e.g. "Weekday mornings after 10am" or "Any day except Tuesday"</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sr-submit-row">
+          <button type="submit" class="btn btn-primary sr-submit-btn">
+            <span class="sr-btn-text">Submit Service Request</span>
+            <span class="sr-btn-sending" style="display:none;">Sending…</span>
+          </button>
+          <p class="sr-note">By submitting this form you consent to Optica Enterprises contacting you regarding your service request. We do not share your information with third parties.</p>
+        </div>
+
+        <div class="sr-success" id="srSuccess" style="display:none;">
+          <span class="sr-success-icon">✅</span>
+          <h3>Service Request Received</h3>
+          <p>Thank you — our service team will contact you within the same business day. For urgent breakdowns call us directly on <a href="tel:+917678273175">+91 76782 73175</a>.</p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECT CONTACT -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Need Immediate Help?</span>
+      <h2>Call or WhatsApp Us Directly</h2>
+      <p>For urgent instrument breakdowns, don't wait for a form response — call us now.</p>
+    </div>
+    <div class="features-grid" style="margin-top:36px;">
+      <div class="feature-card reveal">
+        <div class="feature-icon">📞</div>
+        <h3>+91 76782 73175</h3>
+        <p>Primary service line. Available during business hours, Monday to Saturday.</p>
+        <a href="tel:+917678273175" class="btn btn-ghost" style="margin-top:16px;display:inline-flex;">Call Now</a>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">📱</div>
+        <h3>+91 99100 63557</h3>
+        <p>Secondary line and WhatsApp. Send a message with your instrument model and issue for fast assistance.</p>
+        <a href="https://wa.me/919910063557" target="_blank" class="btn btn-ghost" style="margin-top:16px;display:inline-flex;">WhatsApp Us</a>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">📧</div>
+        <h3>Contact Form</h3>
+        <p>Prefer email-style communication? Use our general contact form for non-urgent enquiries and detailed messages.</p>
+        <a href="contact.html" class="btn btn-ghost" style="margin-top:16px;display:inline-flex;">Open Contact Form</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-company-name">Optica Enterprises</div>
+        <div class="footer-sub">Diagnostic Devices</div>
+      </div>
+      <div class="footer-contact">
+        <p>Reach Us</p>
+        <a href="tel:+917678273175">+91 76782 73175</a>
+        <a href="tel:+919910063557">+91 99100 63557</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Optica Enterprises. All rights reserved.</span>
+      <div class="footer-nav-links">
+        <a href="index.html">About Us</a>
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="brands.html">Brands</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="service.html">Service</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+        <a href="reagents.html">Reagents</a>
+        <a href="compare.html">Compare</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="blog.html">Blog</a>
+        <a href="service-request.html">Service Request</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
