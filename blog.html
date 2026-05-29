@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog &amp; News — Optica Enterprises</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <img src="Optica%20Enterprises%20Logo.png?v=2" alt="Optica Enterprises Logo" />
+        </div>
+        <div class="brand-text">
+          <div class="company-name">Optica Enterprises</div>
+          <div class="company-tagline">Diagnostic Devices</div>
+        </div>
+      </div>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html"     class="nav-link">About Us</a>
+        <a href="home.html"      class="nav-link">Home</a>
+        <a href="products.html"  class="nav-link">Products</a>
+        <a href="brands.html"    class="nav-link">Brands</a>
+        <a href="catalogue.html" class="nav-link">Catalogue</a>
+        <a href="contact.html"   class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Blog &amp; News</h1>
+    <p>Insights on diagnostic technology, laboratory best practices, and updates from Optica Enterprises.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="cat-filter reveal" id="blogFilter">
+      <button class="cat-btn active" data-blog="all">All Posts</button>
+      <button class="cat-btn" data-blog="insights">Lab Insights</button>
+      <button class="cat-btn" data-blog="products">Product Updates</button>
+      <button class="cat-btn" data-blog="news">Industry News</button>
+      <button class="cat-btn" data-blog="tips">Tips &amp; Guides</button>
+    </div>
+
+    <div class="blog-grid" style="margin-top:36px;">
+
+      <!-- Post 1 -->
+      <article class="blog-card reveal" data-blog-cat="insights">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#1b5e20,#388e3c);">
+          <span class="blog-thumb-icon">🔬</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Lab Insights</span>
+            <span class="blog-date">May 2025</span>
+          </div>
+          <h3 class="blog-title">5-Part vs 3-Part Hematology: What Does Your Laboratory Actually Need?</h3>
+          <p class="blog-excerpt">Many laboratories default to a 5-part differential without evaluating whether the extra cost is clinically warranted for their patient mix. We break down when 3-part is sufficient and when 5-part is genuinely essential.</p>
+          <a href="contact.html?ref=blog-1" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Post 2 -->
+      <article class="blog-card reveal reveal-delay-1" data-blog-cat="tips">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#0d47a1,#1565c0);">
+          <span class="blog-thumb-icon">📋</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Tips &amp; Guides</span>
+            <span class="blog-date">April 2025</span>
+          </div>
+          <h3 class="blog-title">How to Set Up a Robust QC Program for Your Clinical Chemistry Analyser</h3>
+          <p class="blog-excerpt">Quality control is the backbone of reliable biochemistry results. This guide covers Westgard rules, QC frequency, multi-level controls, and how to document your program for NABL and regulatory audits.</p>
+          <a href="contact.html?ref=blog-2" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Post 3 -->
+      <article class="blog-card reveal reveal-delay-2" data-blog-cat="products">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#4a148c,#6a1b9a);">
+          <span class="blog-thumb-icon">💡</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Product Update</span>
+            <span class="blog-date">March 2025</span>
+          </div>
+          <h3 class="blog-title">Introducing the Mispa HX50: 5-Part Differential with Reticulocyte Analysis</h3>
+          <p class="blog-excerpt">We're now distributing the Mispa HX50 — Agappe's 3rd-generation 5-part analyzer with nucleic acid fluorescence staining and an independent basophil channel. Here's everything your lab needs to know.</p>
+          <a href="contact.html?ref=blog-3" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Post 4 -->
+      <article class="blog-card reveal" data-blog-cat="news">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#e65100,#f57c00);">
+          <span class="blog-thumb-icon">📰</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Industry News</span>
+            <span class="blog-date">February 2025</span>
+          </div>
+          <h3 class="blog-title">CDSCO Updates IVD Registration Requirements: What Lab Owners Need to Know</h3>
+          <p class="blog-excerpt">The Central Drugs Standard Control Organisation has updated registration requirements for in-vitro diagnostic devices in India. We summarise the key changes and how they affect instrument procurement decisions.</p>
+          <a href="contact.html?ref=blog-4" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Post 5 -->
+      <article class="blog-card reveal reveal-delay-1" data-blog-cat="insights">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#880e4f,#ad1457);">
+          <span class="blog-thumb-icon">❤️</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Lab Insights</span>
+            <span class="blog-date">January 2025</span>
+          </div>
+          <h3 class="blog-title">Point-of-Care Cardiac Markers: How Fast Results Are Changing Emergency Medicine</h3>
+          <p class="blog-excerpt">Fluorescence immunoassay platforms now deliver quantitative Troponin and NT-proBNP in under 15 minutes. We explore how emergency departments are using this capability to improve triage and patient outcomes.</p>
+          <a href="contact.html?ref=blog-5" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Post 6 -->
+      <article class="blog-card reveal reveal-delay-2" data-blog-cat="tips">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#006064,#00838f);">
+          <span class="blog-thumb-icon">🧪</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Tips &amp; Guides</span>
+            <span class="blog-date">December 2024</span>
+          </div>
+          <h3 class="blog-title">Electrolyte Analysis: Choosing Between ISE, Flame Photometry and Indirect Methods</h3>
+          <p class="blog-excerpt">ISE, flame photometry, and indirect measurement each have trade-offs in accuracy, sample type flexibility, and throughput. This guide helps laboratory managers select the right technology for their clinical context.</p>
+          <a href="contact.html?ref=blog-6" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Post 7 -->
+      <article class="blog-card reveal" data-blog-cat="products">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#1a237e,#283593);">
+          <span class="blog-thumb-icon">🩸</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Product Update</span>
+            <span class="blog-date">November 2024</span>
+          </div>
+          <h3 class="blog-title">OPTI CCA TS 2: Cassette-Based Blood Gas for the Indian ICU and ED</h3>
+          <p class="blog-excerpt">Blood gas analysis no longer requires a fixed bench-top analyser with daily calibration. We explain how the OPTI CCA TS 2's single-use cassette design makes it the right choice for emergency and critical care settings.</p>
+          <a href="contact.html?ref=blog-7" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Post 8 -->
+      <article class="blog-card reveal reveal-delay-1" data-blog-cat="news">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#33691e,#558b2f);">
+          <span class="blog-thumb-icon">🏥</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Industry News</span>
+            <span class="blog-date">October 2024</span>
+          </div>
+          <h3 class="blog-title">India's IVD Market 2025: Growth Trends and What They Mean for Diagnostic Labs</h3>
+          <p class="blog-excerpt">India's in-vitro diagnostics market is projected to grow at over 12% CAGR through 2027. We look at the drivers — rising chronic disease burden, NABL accreditation push, and government health scheme expansion — and what this means for lab operators planning instrument upgrades.</p>
+          <a href="contact.html?ref=blog-8" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Post 9 -->
+      <article class="blog-card reveal reveal-delay-2" data-blog-cat="insights">
+        <div class="blog-thumb" style="background: linear-gradient(135deg,#bf360c,#d84315);">
+          <span class="blog-thumb-icon">📊</span>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-cat-tag">Lab Insights</span>
+            <span class="blog-date">September 2024</span>
+          </div>
+          <h3 class="blog-title">Understanding HbA1c Methods: HPLC vs Immunoassay vs Turbidimetry</h3>
+          <p class="blog-excerpt">Not all HbA1c methods are equal. HPLC provides gold-standard accuracy and can identify variant haemoglobins, while immunoassay and turbidimetric methods offer speed and lower cost. We compare all three for diabetic monitoring use cases.</p>
+          <a href="contact.html?ref=blog-9" class="blog-read-more">Read More →</a>
+        </div>
+      </article>
+
+    </div><!-- /.blog-grid -->
+  </div>
+</section>
+
+<!-- NEWSLETTER CTA -->
+<section class="cta-band">
+  <div class="container">
+    <h2 class="reveal">Want More Lab Insights?</h2>
+    <p class="reveal reveal-delay-1">Contact us to receive updates, product news, and technical guides directly from our team.</p>
+    <div class="hero-btns reveal reveal-delay-2">
+      <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+      <a href="faq.html"     class="btn btn-outline">Read Our FAQ</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-company-name">Optica Enterprises</div>
+        <div class="footer-sub">Diagnostic Devices</div>
+      </div>
+      <div class="footer-contact">
+        <p>Reach Us</p>
+        <a href="tel:+917678273175">+91 76782 73175</a>
+        <a href="tel:+919910063557">+91 99100 63557</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Optica Enterprises. All rights reserved.</span>
+      <div class="footer-nav-links">
+        <a href="index.html">About Us</a>
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="brands.html">Brands</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="service.html">Service</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+        <a href="reagents.html">Reagents</a>
+        <a href="compare.html">Compare</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="blog.html">Blog</a>
+        <a href="service-request.html">Service Request</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

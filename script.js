@@ -45,6 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionHeaderStagger();
   initHeroCollage3D();
   initStatCardTilt();
+  /* ── New pages ── */
+  initReagentAccordion();
+  initBlogFilter();
+  initCompare();
+  initServiceRequest();
 });
 
 function initScrollingQueue() {
@@ -1132,6 +1137,375 @@ function initLightReveal() {
       card.style.setProperty('--lr-x', '50%');
       card.style.setProperty('--lr-y', '50%');
     });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NEW PAGES — JS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Reagent accordion + category filter ─────────────────────── */
+function initReagentAccordion() {
+  // Accordion
+  document.querySelectorAll('.rgt-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.rgt-card');
+      const body = card.querySelector('.rgt-body');
+      const isOpen = card.classList.contains('rgt-open');
+
+      // Close all
+      document.querySelectorAll('.rgt-card.rgt-open').forEach(c => {
+        c.classList.remove('rgt-open');
+        c.querySelector('.rgt-body').style.maxHeight = null;
+      });
+
+      // Toggle clicked
+      if (!isOpen) {
+        card.classList.add('rgt-open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Category filter
+  const filterBtns = document.querySelectorAll('#rgtFilter .cat-btn');
+  const cards = document.querySelectorAll('.rgt-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.rgt;
+
+      // Close all open accordions first
+      document.querySelectorAll('.rgt-card.rgt-open').forEach(c => {
+        c.classList.remove('rgt-open');
+        c.querySelector('.rgt-body').style.maxHeight = null;
+      });
+
+      cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.rgtCat === cat;
+        card.style.display = match ? '' : 'none';
+      });
+    });
+  });
+}
+
+/* ── Blog category filter ─────────────────────────────────────── */
+function initBlogFilter() {
+  const btns  = document.querySelectorAll('#blogFilter .cat-btn');
+  const posts = document.querySelectorAll('.blog-card');
+  if (!btns.length) return;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.blog;
+      posts.forEach(post => {
+        const match = cat === 'all' || post.dataset.blogCat === cat;
+        post.style.display = match ? '' : 'none';
+      });
+    });
+  });
+}
+
+/* ── Instrument Comparison Tool ───────────────────────────────── */
+function initCompare() {
+  const selects = [
+    document.getElementById('cmp1'),
+    document.getElementById('cmp2'),
+    document.getElementById('cmp3'),
+  ];
+  const btn     = document.getElementById('cmpBtn');
+  const clearBtn= document.getElementById('cmpClear');
+  const result  = document.getElementById('compareResult');
+  if (!btn || !result) return;
+
+  const PRODUCTS = {
+    'mispa-count-x': {
+      name: 'Mispa Count X', brand: 'Agappe Diagnostics', category: 'Hematology',
+      technology: '3-Part WBC Differential — impedance + photometry',
+      parameters: '21 CBC parameters + 3 histograms + NLR/PLR',
+      throughput: '60 samples / hr',
+      sampleTypes: 'Whole blood (EDTA)',
+      sampleVolume: '9 µL',
+      resultTime: '~60 seconds',
+      display: '10.4" TFT touchscreen',
+      connectivity: 'Bidirectional LIS',
+      highlight: 'Auto-cleaning; 3-level QC; compact design'
+    },
+    'mispa-hx50': {
+      name: 'Mispa HX50', brand: 'Agappe Diagnostics', category: 'Hematology',
+      technology: '5-Part WBC diff — Nucleic Acid Fluorescence + Tri-angle Laser Scattering',
+      parameters: '5-part diff CBC + Reticulocyte analysis',
+      throughput: '50 samples / hr',
+      sampleTypes: 'Whole blood (EDTA)',
+      sampleVolume: 'Small volume',
+      resultTime: '~72 seconds',
+      display: 'TFT colour touchscreen',
+      connectivity: 'LIS connectivity',
+      highlight: 'Independent basophil channel; comprehensive flagging; reticulocyte'
+    },
+    'mispa-viva': {
+      name: 'Mispa VIVA', brand: 'Agappe Diagnostics', category: 'Clinical Chemistry',
+      technology: 'Semi-automated photometry; ERA Flow Cell; EMF pH measurement',
+      parameters: 'Full biochemistry (open system) — liver, kidney, lipid, cardiac, diabetes',
+      throughput: 'Semi-automated (manual loading)',
+      sampleTypes: 'Serum, plasma, urine, CSF',
+      sampleVolume: '30 µL (ERA flow cell)',
+      resultTime: 'Per test',
+      display: 'Built-in display + thermal printer',
+      connectivity: 'RS-232 &amp; USB',
+      highlight: 'ERA Flow Cell; 6 filter wavelengths; 3 measurement modes; cost-effective'
+    },
+    'mispa-plus': {
+      name: 'Mispa Plus', brand: 'Agappe Diagnostics', category: 'Clinical Chemistry',
+      technology: 'Semi-automated; Penta Lens Photometry System',
+      parameters: '300 programmable channels — open system',
+      throughput: 'Semi-automated (manual loading)',
+      sampleTypes: 'Serum, plasma, urine',
+      sampleVolume: 'Standard cuvette',
+      resultTime: 'Per test',
+      display: '7" capacitive touchscreen + thermal printer',
+      connectivity: 'Built-in printer; RS-232',
+      highlight: 'Penta Lens optics; 8 filter wavelengths; economic reagent use'
+    },
+    'mispa-fab120': {
+      name: 'Mispa FAB 120', brand: 'Agappe Diagnostics', category: 'Clinical Chemistry',
+      technology: 'Fully automated photometry + ISE electrolytes',
+      parameters: 'Full biochemistry + ISE electrolytes + special proteins',
+      throughput: '120 tests / hr',
+      sampleTypes: 'Serum, plasma, urine',
+      sampleVolume: 'Automated dispensing',
+      resultTime: 'Continuous (random access)',
+      display: '10.4" colour touchscreen',
+      connectivity: 'Bidirectional LIS',
+      highlight: 'Made in India; 40 reagent positions; on-board reagent refrigeration'
+    },
+    'mispa-cxl': {
+      name: 'Mispa CXL Pro Plus', brand: 'Agappe Diagnostics', category: 'Clinical Chemistry',
+      technology: 'Fully automated high-throughput; multi-wavelength photometry',
+      parameters: 'Full biochemistry + special chemistry',
+      throughput: '240 tests / hr',
+      sampleTypes: 'Serum, plasma, urine',
+      sampleVolume: 'Automated dispensing',
+      resultTime: 'Continuous (random access)',
+      display: 'Colour touchscreen',
+      connectivity: 'Bidirectional LIS',
+      highlight: '60 reagent positions; auto rerun &amp; dilution; auto washing &amp; decontamination'
+    },
+    'mispa-nano': {
+      name: 'Mispa nano Plus', brand: 'Agappe Diagnostics', category: 'Clinical Chemistry',
+      technology: 'Fully automated; compact bench-top; on-board refrigeration',
+      parameters: 'Full biochemistry menu',
+      throughput: '360 tests / hr',
+      sampleTypes: 'Serum, plasma, urine',
+      sampleVolume: 'Automated dispensing',
+      resultTime: 'Continuous (random access)',
+      display: 'Colour touchscreen',
+      connectivity: 'Bidirectional LIS',
+      highlight: 'Highest throughput; compact footprint; 2–12°C reagent cooling'
+    },
+    'mispa-revo': {
+      name: 'Mispa REVO', brand: 'Agappe Diagnostics', category: 'Immunoassay',
+      technology: 'Time-Resolved Fluorescence Immunoassay (TRFIA); dry cartridge',
+      parameters: 'Thyroid, cardiac, fertility, infection, bone, tumour panels',
+      throughput: 'Per cartridge (POCT)',
+      sampleTypes: 'Serum, plasma, whole blood (panel-dependent)',
+      sampleVolume: 'Small (cartridge pre-filled)',
+      resultTime: '15–30 min (panel-dependent)',
+      display: 'Colour touchscreen',
+      connectivity: 'Bluetooth &amp; USB',
+      highlight: 'No liquid reagent prep; QR code calibration; POCT-ready; portable'
+    },
+    'getein-1100': {
+      name: 'Getein 1100', brand: 'Getein Biotech', category: 'Immunoassay',
+      technology: 'Fluorescence Immunoassay (FIA); fully automated',
+      parameters: 'Cardiac, thyroid, fertility, infection, D-dimer, tumour, bone panels',
+      throughput: 'Fully automated single-test',
+      sampleTypes: 'Serum, plasma, whole blood',
+      sampleVolume: 'Small (FIA card)',
+      resultTime: '3–15 minutes',
+      display: '7" touchscreen',
+      connectivity: 'Bluetooth &amp; USB; 100,000-result storage',
+      highlight: 'Auto barcode reader; quantitative POCT; widest panel menu'
+    },
+    'mispa-clog': {
+      name: 'Mispa CLOG', brand: 'Agappe Diagnostics', category: 'Coagulation',
+      technology: 'Fully automated; optical clot detection; 37°C incubation',
+      parameters: 'PT, APTT, TT, Fibrinogen',
+      throughput: '2 channels simultaneous',
+      sampleTypes: 'Citrated plasma (3.2%)',
+      sampleVolume: 'Standard coagulation tube',
+      resultTime: 'Test-dependent',
+      display: 'Display + thermal printer',
+      connectivity: 'LIS / HIS interface',
+      highlight: 'Auto sample &amp; reagent detection; comprehensive QC program; precision 37°C'
+    },
+    'wondfo-ocg': {
+      name: 'Wondfo OCG-102', brand: 'Wondfo', category: 'Coagulation',
+      technology: 'Optical turbidity; 2-channel; portable; rechargeable battery',
+      parameters: 'PT, APTT, TT, Fibrinogen, ACT',
+      throughput: '2 channels simultaneous',
+      sampleTypes: 'Capillary or venous whole blood',
+      sampleVolume: '20 µL',
+      resultTime: 'Test-dependent',
+      display: 'LCD + thermal printer',
+      connectivity: 'LIS interface',
+      highlight: 'Portable (850 g); rechargeable battery; capillary blood; ACT testing'
+    },
+    'mispa-maestro': {
+      name: 'Mispa Maestro', brand: 'Agappe Diagnostics', category: 'HbA1c',
+      technology: 'HPLC-based detection; RFID reagent management',
+      parameters: 'HbA1c, HbA0, HbA2, HbF, haemoglobin variants',
+      throughput: '72 sec/sample; up to 50 samples continuous',
+      sampleTypes: 'EDTA whole blood',
+      sampleVolume: 'Small volume',
+      resultTime: '72 seconds per sample',
+      display: 'Large touchscreen',
+      connectivity: 'LIS / HIS integration',
+      highlight: 'RFID chip management; variant identification; 50-sample continuous loading'
+    },
+    'mispa-i3': {
+      name: 'Mispa i3', brand: 'Agappe Diagnostics', category: 'Specific Proteins',
+      technology: 'Dual-channel: Nephelometry + Turbidimetry; cartridge-based',
+      parameters: 'CRP, ASO, RF, IgA, IgG, IgM, allergy, cardiovascular risk proteins',
+      throughput: '15 min/test (POCT)',
+      sampleTypes: 'Serum, plasma',
+      sampleVolume: 'Small (cartridge)',
+      resultTime: '15 minutes',
+      display: 'Colour touchscreen',
+      connectivity: 'LIS interface',
+      highlight: 'No daily maintenance; dual-detection; POCT-ready; sealed cartridges'
+    },
+    'exias-e1': {
+      name: 'EXIAS E1', brand: 'EXIAS Medical (Austria)', category: 'Electrolytes',
+      technology: 'Ion-Selective Electrode (ISE); 6-parameter simultaneous',
+      parameters: 'Na⁺, K⁺, Cl⁻, iCa²⁺, pH, Hct',
+      throughput: '25 sec / sample',
+      sampleTypes: 'Serum, plasma, urine, whole blood',
+      sampleVolume: 'Small ISE volume',
+      resultTime: '25 seconds',
+      display: '3.5" colour display + thermal printer',
+      connectivity: 'Bidirectional LIS',
+      highlight: 'Auto calibration &amp; QC; 4 sample types; 25-second turnaround'
+    },
+    'opti-cca': {
+      name: 'OPTI CCA TS 2', brand: 'OPTI Medical Systems (USA)', category: 'Critical Care / Blood Gas',
+      technology: 'Optical fluorescence; single-use cassette; no calibration required',
+      parameters: 'Blood gas (pH, pCO₂, pO₂), electrolytes, metabolites, Hct',
+      throughput: 'Single cassette; bedside portable',
+      sampleTypes: 'Whole blood (arterial, venous, capillary)',
+      sampleVolume: '125 µL',
+      resultTime: 'Under 120 seconds',
+      display: 'Colour touchscreen',
+      connectivity: 'LIS; USB',
+      highlight: '8-hr battery; 4.3 kg portable; no calibration; ICU / ED use'
+    },
+  };
+
+  const ROWS = [
+    { label: 'Brand',           key: 'brand'       },
+    { label: 'Category',        key: 'category'    },
+    { label: 'Technology',      key: 'technology'  },
+    { label: 'Parameters',      key: 'parameters'  },
+    { label: 'Throughput',      key: 'throughput'  },
+    { label: 'Sample Types',    key: 'sampleTypes' },
+    { label: 'Sample Volume',   key: 'sampleVolume'},
+    { label: 'Result Time',     key: 'resultTime'  },
+    { label: 'Display',         key: 'display'     },
+    { label: 'Connectivity',    key: 'connectivity'},
+    { label: 'Key Highlights',  key: 'highlight'   },
+  ];
+
+  // Populate dropdowns
+  const opts = Object.entries(PRODUCTS)
+    .sort((a,b) => a[1].name.localeCompare(b[1].name));
+
+  selects.forEach(sel => {
+    opts.forEach(([id, p]) => {
+      const o = document.createElement('option');
+      o.value = id;
+      o.textContent = p.name + ' (' + p.category + ')';
+      sel.appendChild(o);
+    });
+  });
+
+  function renderTable() {
+    const chosen = selects.map(s => s.value).filter(Boolean);
+    if (chosen.length < 2) {
+      result.innerHTML = `<div class="compare-empty"><span class="cmp-empty-icon">⚗️</span>Select at least 2 instruments above and click <strong>Compare Instruments</strong>.</div>`;
+      return;
+    }
+    const prods = chosen.map(id => ({ id, ...PRODUCTS[id] }));
+
+    let th = '<th>Specification</th>';
+    prods.forEach(p => {
+      th += `<th><span class="cmp-prod-name">${p.name}</span><span class="cmp-prod-brand">${p.brand}</span></th>`;
+    });
+
+    let rows = '';
+    ROWS.forEach(r => {
+      let cells = `<td>${r.label}</td>`;
+      prods.forEach(p => { cells += `<td>${p[r.key] || '—'}</td>`; });
+      rows += `<tr>${cells}</tr>`;
+    });
+
+    // Actions row
+    let actCells = `<td>Enquire</td>`;
+    prods.forEach(() => { actCells += `<td><a href="contact.html" class="btn btn-primary" style="font-size:0.8rem;padding:8px 16px;">Get a Quote</a></td>`; });
+    rows += `<tr>${actCells}</tr>`;
+
+    result.innerHTML = `<div class="compare-table-wrap"><table class="compare-table"><thead><tr>${th}</tr></thead><tbody>${rows}</tbody></table></div>`;
+  }
+
+  btn.addEventListener('click', renderTable);
+  clearBtn.addEventListener('click', () => {
+    selects.forEach(s => s.value = '');
+    result.innerHTML = '';
+  });
+
+  // Show placeholder on load
+  result.innerHTML = `<div class="compare-empty"><span class="cmp-empty-icon">⚗️</span>Select at least 2 instruments above and click <strong>Compare Instruments</strong>.</div>`;
+}
+
+/* ── Service Request Form ─────────────────────────────────────── */
+function initServiceRequest() {
+  const form    = document.getElementById('serviceRequestForm');
+  const success = document.getElementById('srSuccess');
+  if (!form) return;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btnText    = form.querySelector('.sr-btn-text');
+    const btnSending = form.querySelector('.sr-btn-sending');
+    if (btnText) btnText.style.display = 'none';
+    if (btnSending) btnSending.style.display = '';
+
+    // Build WhatsApp message from form data
+    const data = new FormData(form);
+    const msg = encodeURIComponent(
+      `*Service Request — Optica Enterprises*\n\n` +
+      `Name: ${data.get('name') || '—'}\n` +
+      `Organisation: ${data.get('organisation') || '—'}\n` +
+      `Phone: ${data.get('phone') || '—'}\n` +
+      `Email: ${data.get('email') || '—'}\n` +
+      `Address: ${data.get('address') || '—'}\n\n` +
+      `Instrument: ${data.get('model') || '—'}\n` +
+      `Serial No: ${data.get('serial') || '—'}\n\n` +
+      `Request Type: ${data.get('issueType') || '—'}\n` +
+      `Urgency: ${data.get('urgency') || '—'}\n\n` +
+      `Issue Description:\n${data.get('description') || '—'}\n\n` +
+      `Availability: ${data.get('availability') || '—'}`
+    );
+
+    // Open WhatsApp after short delay (simulate send)
+    setTimeout(() => {
+      window.open(`https://wa.me/919910063557?text=${msg}`, '_blank');
+      form.reset();
+      form.style.display = 'none';
+      if (success) success.style.display = 'block';
+    }, 800);
   });
 }
 

@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page Not Found — Optica Enterprises</title>
+  <title>Compare Instruments — Optica Enterprises</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <div id="scroll-progress"></div>
 
-<!-- ════════════════════════════ HEADER ════════════════════════════ -->
 <header class="site-header">
   <div class="container">
     <div class="header-inner">
@@ -25,7 +24,7 @@
       <nav class="main-nav" id="mainNav">
         <a href="index.html"     class="nav-link">About Us</a>
         <a href="home.html"      class="nav-link">Home</a>
-        <a href="products.html"  class="nav-link">Products</a>
+        <a href="products.html"  class="nav-link active">Products</a>
         <a href="brands.html"    class="nav-link">Brands</a>
         <a href="catalogue.html" class="nav-link">Catalogue</a>
         <a href="contact.html"   class="nav-link">Contact</a>
@@ -35,20 +34,66 @@
   </div>
 </header>
 
-<!-- ════════════════════════════ 404 CONTENT ════════════════════════════ -->
-<div class="page-404">
-  <div class="err-code">404</div>
-  <h1 class="err-title">Page Not Found</h1>
-  <p class="err-desc">The page you're looking for doesn't exist or may have been moved. Let us point you in the right direction.</p>
-  <div class="err-links">
-    <a href="home.html"      class="btn btn-primary">Go Home</a>
-    <a href="products.html"  class="btn btn-outline">Browse Products</a>
-    <a href="catalogue.html" class="btn btn-ghost">Catalogues</a>
-    <a href="contact.html"   class="btn btn-ghost">Contact Us</a>
+<section class="page-hero">
+  <div class="container">
+    <h1>Instrument Comparison Tool</h1>
+    <p>Select up to three instruments to compare their key specifications side by side.</p>
   </div>
-</div>
+</section>
 
-<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
+<section class="section">
+  <div class="container">
+
+    <!-- SELECTOR -->
+    <div class="compare-selector reveal">
+      <div class="section-header" style="margin-bottom:28px;">
+        <span class="section-eyebrow">Step 1</span>
+        <h2>Choose Instruments to Compare</h2>
+        <p>Select 2 or 3 instruments from the dropdowns below, then click Compare.</p>
+      </div>
+      <div class="compare-dropdowns">
+        <div class="compare-drop-group">
+          <label for="cmp1">Instrument 1</label>
+          <select id="cmp1" class="compare-select">
+            <option value="">— Select —</option>
+          </select>
+        </div>
+        <div class="compare-drop-group">
+          <label for="cmp2">Instrument 2</label>
+          <select id="cmp2" class="compare-select">
+            <option value="">— Select —</option>
+          </select>
+        </div>
+        <div class="compare-drop-group">
+          <label for="cmp3">Instrument 3 <span style="color:var(--text-mid);font-weight:400;">(optional)</span></label>
+          <select id="cmp3" class="compare-select">
+            <option value="">— Select —</option>
+          </select>
+        </div>
+      </div>
+      <div class="compare-actions">
+        <button class="btn btn-primary" id="cmpBtn">Compare Instruments</button>
+        <button class="btn btn-ghost"   id="cmpClear">Clear</button>
+      </div>
+    </div>
+
+    <!-- RESULT TABLE -->
+    <div id="compareResult" style="margin-top:40px;"></div>
+
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2 class="reveal">Need Help Choosing?</h2>
+    <p class="reveal reveal-delay-1">Our specialists can recommend the right instrument based on your workload, sample mix, budget, and space. No obligation.</p>
+    <div class="hero-btns reveal reveal-delay-2">
+      <a href="contact.html"  class="btn btn-primary">Get a Recommendation</a>
+      <a href="products.html" class="btn btn-outline">Full Product Listing</a>
+    </div>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-inner">
@@ -82,7 +127,6 @@
     </div>
   </div>
 </footer>
-
 <script src="script.js"></script>
 </body>
 </html>
