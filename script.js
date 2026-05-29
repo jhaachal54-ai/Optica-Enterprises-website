@@ -273,15 +273,19 @@ function initScrollReveal() {
   );
   if (!els.length) return;
 
+  // Hysteresis: show when ≥12 % in view, hide only when <2 % in view.
+  // The dead-zone between 2 % and 12 % prevents rapid add/remove jitter
+  // at scroll boundaries (e.g. tall brand cards where only the button shows).
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
+      if (entry.intersectionRatio >= 0.12) {
         entry.target.classList.add('visible');
-      } else {
+      } else if (entry.intersectionRatio < 0.02) {
         entry.target.classList.remove('visible');
       }
+      // 0.02–0.12 zone → do nothing, preserving current state
     });
-  }, { threshold: 0.12 });
+  }, { threshold: [0, 0.02, 0.12, 1] });
 
   els.forEach(el => observer.observe(el));
 }
@@ -1165,16 +1169,16 @@ function initSectionHeaderStagger() {
   // Mark every header so the CSS can start children hidden
   headers.forEach(h => h.classList.add('stagger-init'));
 
+  // Same hysteresis pattern: show at ≥20 %, hide only at <3 %
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
+      if (entry.intersectionRatio >= 0.2) {
         entry.target.classList.add('hdr-in');
-      } else {
-        // Remove so children re-animate on next scroll-in
+      } else if (entry.intersectionRatio < 0.03) {
         entry.target.classList.remove('hdr-in');
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: [0, 0.03, 0.2, 1] });
 
   headers.forEach(h => obs.observe(h));
 }
