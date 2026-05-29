@@ -1188,6 +1188,20 @@ function initReagentAccordion() {
       });
     });
   });
+
+  /* Auto-open accordion when arriving via anchor link from products page */
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target && target.classList.contains('rgt-card')) {
+      const header = target.querySelector('.rgt-header');
+      const body   = target.querySelector('.rgt-body');
+      if (header && body) {
+        target.classList.add('rgt-open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 400);
+      }
+    }
+  }
 }
 
 /* ── Blog category filter ─────────────────────────────────────── */
@@ -1520,15 +1534,11 @@ function initDynamicNav() {
 
   nav.innerHTML = linksHTML + moreHTML;
 
-  /* Wire up dropdown interaction */
-  const wrapper = document.getElementById('navMore');
-  const btn     = document.getElementById('navMoreBtn');
-  const panel   = wrapper ? wrapper.querySelector('.nav-more-panel') : null;
-  if (!wrapper || !btn || !panel) return;
-
-  /* Desktop: hover open/close */
-  wrapper.addEventListener('mouseenter', () => { panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); });
-  wrapper.addEventListener('mouseleave', () => { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+  /* Desktop hover is handled purely by CSS (:hover on .nav-more).
+     JS only handles the mobile click toggle + keyboard close. */
+  const btn   = document.getElementById('navMoreBtn');
+  const panel = document.querySelector('.nav-more-panel');
+  if (!btn || !panel) return;
 
   /* Mobile / keyboard: click toggle */
   btn.addEventListener('click', e => {
@@ -1538,7 +1548,10 @@ function initDynamicNav() {
   });
 
   /* Close on outside click */
-  document.addEventListener('click', () => { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+  document.addEventListener('click', () => {
+    panel.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  });
 
   /* Close on Escape */
   document.addEventListener('keydown', e => {

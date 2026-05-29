@@ -221,7 +221,7 @@ img { max-width: 100%; height: auto; }
   font-weight: 500;
   margin-top: 3px;
 }
-.main-nav { display: flex; gap: 6px; }
+.main-nav { display: flex; gap: 6px; align-items: center; }
 .nav-link {
   padding: 9px 22px;
   border-radius: var(--radius-sm);
@@ -249,7 +249,7 @@ img { max-width: 100%; height: auto; }
 }
 
 /* ── "More" dropdown ────────────────────────────────────────── */
-.nav-more { position: relative; display: flex; align-items: stretch; }
+.nav-more { position: relative; display: flex; align-items: center; }
 .nav-more-btn {
   background: none; border: 1px solid transparent; cursor: pointer;
   display: flex; align-items: center; gap: 4px; white-space: nowrap;
@@ -259,25 +259,29 @@ img { max-width: 100%; height: auto; }
   display: inline-block; font-size: 0.7em;
   transition: transform 0.25s ease;
 }
-.nav-more-btn[aria-expanded="true"] .nav-more-chevron,
-.nav-more-panel.open ~ .nav-more-btn .nav-more-chevron { transform: rotate(180deg); }
-.nav-more-panel.open + .nav-more-btn .nav-more-chevron,
-.nav-more:hover .nav-more-chevron { transform: rotate(180deg); }
+/* Rotate chevron on CSS hover or when panel is JS-opened */
+.nav-more:hover .nav-more-chevron,
+.nav-more-btn[aria-expanded="true"] .nav-more-chevron { transform: rotate(180deg); }
 
 .nav-more-panel {
   display: none;
-  position: absolute; top: calc(100% + 8px); right: 0;
-  min-width: 180px;
-  background: rgba(11,16,11,0.97);
+  position: absolute; top: 100%; right: 0;
+  min-width: 185px;
+  background: rgba(11,16,11,0.98);
   backdrop-filter: blur(24px);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(76,175,80,0.08);
-  padding: 8px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.65), 0 0 0 1px rgba(76,175,80,0.08);
+  padding: 6px;
+  padding-top: 10px; /* bridge the visual gap without leaving a real gap */
   z-index: 1001;
   flex-direction: column; gap: 2px;
 }
+/* CSS hover — parent stays hovered even over absolute children */
+.nav-more:hover .nav-more-panel { display: flex; }
+/* JS click toggle for mobile */
 .nav-more-panel.open { display: flex; }
+
 .nav-more-item {
   display: block; padding: 9px 16px;
   border-radius: 8px; font-size: 0.9rem; font-weight: 500;
@@ -296,10 +300,13 @@ img { max-width: 100%; height: auto; }
     position: static; width: 100%;
     background: rgba(76,175,80,0.05);
     border-color: rgba(76,175,80,0.1);
-    box-shadow: none; margin-top: 4px;
+    box-shadow: none; margin-top: 4px; padding-top: 6px;
     backdrop-filter: none;
   }
 }
+
+/* ── Service request sections: opacity-only reveal (no translateY to prevent overlap) */
+.sr-section.reveal { transform: none; }
 
 /* ══════════════════════════════════════════════════════════════
    HERO  (Home page)
