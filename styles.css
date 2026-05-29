@@ -2748,3 +2748,128 @@ body {
     var(--bg-card) 68%
   ) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   ANIMATION SUITE v2
+   ══════════════════════════════════════════════════════════════ */
+
+/* 1 · Page fade transition ------------------------------------ */
+body {
+  transition: opacity 0.28s ease;
+}
+
+/* 2 · Section-header stagger ---------------------------------- */
+.section-header .section-eyebrow {
+  transition: opacity 0.45s ease 0s, transform 0.45s ease 0s;
+}
+.section-header h2 {
+  transition: opacity 0.5s ease 0.13s, transform 0.5s ease 0.13s;
+}
+.section-header p {
+  transition: opacity 0.45s ease 0.26s, transform 0.45s ease 0.26s;
+}
+.section-header.stagger-init .section-eyebrow,
+.section-header.stagger-init h2,
+.section-header.stagger-init p {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.section-header.hdr-in .section-eyebrow,
+.section-header.hdr-in h2,
+.section-header.hdr-in p {
+  opacity: 1;
+  transform: none;
+}
+
+/* 3 · WhatsApp pulse rings ------------------------------------ */
+.wa-float {
+  overflow: visible;
+}
+.wa-float::before,
+.wa-float::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.35);
+  animation: wa-ring 2.4s ease-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+.wa-float::after {
+  animation-delay: 1.2s;
+}
+@keyframes wa-ring {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(2.5); opacity: 0;   }
+}
+
+/* 4 · Category filter press feedback -------------------------- */
+.cat-btn:active {
+  transform: scale(0.91) !important;
+  transition: transform 0.08s ease !important;
+}
+
+/* 5 · Timeline dot hover glow --------------------------------- */
+.tl-dot {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.tl-item:hover .tl-dot {
+  transform: scale(1.45);
+  box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.22), 0 0 16px rgba(76, 175, 80, 0.42);
+}
+
+/* 6 · Download button shake ----------------------------------- */
+@keyframes dl-shake {
+  0%   { transform: translateY(-1px) translateX(0); }
+  14%  { transform: translateY(-1px) translateX(-4px) rotate(-1.5deg); }
+  28%  { transform: translateY(-1px) translateX( 4px) rotate( 1.5deg); }
+  42%  { transform: translateY(-1px) translateX(-3px) rotate(-1deg); }
+  56%  { transform: translateY(-1px) translateX( 3px) rotate( 0.8deg); }
+  70%  { transform: translateY(-1px) translateX(-2px); }
+  85%  { transform: translateY(-1px) translateX( 2px); }
+  100% { transform: translateY(-1px) translateX(0); }
+}
+.btn-download:hover {
+  animation: dl-shake 0.46s ease !important;
+}
+
+/* 7 · Footer / contact info link underline grow --------------- */
+.footer-contact a,
+.ci-text a {
+  position: relative;
+  text-decoration: none;
+}
+.footer-contact a::after,
+.ci-text a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1.5px;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 0.32s ease;
+}
+.footer-contact a:hover::after,
+.ci-text a:hover::after {
+  width: 100%;
+}
+
+/* 8 · Brand monogram 3D tilt ---------------------------------- */
+.brand-monogram {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transform-style: preserve-3d;
+}
+.brand-card:hover .brand-monogram {
+  transform: rotateY(20deg) scale(1.15);
+  box-shadow: -6px 6px 22px rgba(76, 175, 80, 0.35);
+}
+
+/* 9 · Stat card 3D tilt support ------------------------------ */
+.stat-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
