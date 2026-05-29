@@ -248,6 +248,58 @@ img { max-width: 100%; height: auto; }
   line-height: 1;
 }
 
+/* ── "More" dropdown ────────────────────────────────────────── */
+.nav-more { position: relative; }
+.nav-more-btn {
+  background: none; border: 1px solid transparent; cursor: pointer;
+  display: flex; align-items: center; gap: 4px; white-space: nowrap;
+}
+.nav-more-btn .nav-more-chevron {
+  display: inline-block; font-size: 0.7em;
+  transition: transform 0.25s ease;
+}
+.nav-more-btn[aria-expanded="true"] .nav-more-chevron,
+.nav-more-panel.open ~ .nav-more-btn .nav-more-chevron { transform: rotate(180deg); }
+.nav-more-panel.open + .nav-more-btn .nav-more-chevron,
+.nav-more:hover .nav-more-chevron { transform: rotate(180deg); }
+
+.nav-more-panel {
+  display: none;
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 180px;
+  background: rgba(11,16,11,0.97);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(76,175,80,0.08);
+  padding: 8px;
+  z-index: 1001;
+  flex-direction: column; gap: 2px;
+}
+.nav-more-panel.open { display: flex; }
+.nav-more-item {
+  display: block; padding: 9px 16px;
+  border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+  color: var(--text-mid); transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-more-item:hover, .nav-more-item.active {
+  background: var(--green-pale); color: var(--green-light);
+}
+
+/* Mobile: dropdown expands inline within the mobile nav */
+@media (max-width: 640px) {
+  .nav-more { width: 100%; }
+  .nav-more-btn { width: 100%; justify-content: space-between; }
+  .nav-more-panel {
+    position: static; width: 100%;
+    background: rgba(76,175,80,0.05);
+    border-color: rgba(76,175,80,0.1);
+    box-shadow: none; margin-top: 4px;
+    backdrop-filter: none;
+  }
+}
+
 /* ══════════════════════════════════════════════════════════════
    HERO  (Home page)
 ══════════════════════════════════════════════════════════════ */

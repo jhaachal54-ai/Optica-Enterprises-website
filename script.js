@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initBlogFilter();
   initCompare();
   initServiceRequest();
+  /* ── Nav dropdown ── */
+  initNavDropdown();
 });
 
 function initScrollingQueue() {
@@ -1469,6 +1471,44 @@ function initCompare() {
   result.innerHTML = `<div class="compare-empty"><span class="cmp-empty-icon">⚗️</span>Select at least 2 instruments above and click <strong>Compare Instruments</strong>.</div>`;
 }
 
+/* ── Nav "More" Dropdown ──────────────────────────────────────── */
+function initNavDropdown() {
+  const wrapper = document.getElementById('navMore');
+  const btn     = document.getElementById('navMoreBtn');
+  const panel   = wrapper ? wrapper.querySelector('.nav-more-panel') : null;
+  if (!wrapper || !btn || !panel) return;
+
+  // Mark button active when current page is one of the "more" pages
+  const morePages = ['service.html','faq.html','reagents.html','compare.html',
+                     'testimonials.html','blog.html','service-request.html'];
+  const currentPage = window.location.pathname.split('/').pop() || '';
+  if (morePages.includes(currentPage)) btn.classList.add('active');
+
+  let hoverOpen = false;
+
+  // Desktop: open/close on hover
+  wrapper.addEventListener('mouseenter', () => { hoverOpen = true;  panel.classList.add('open'); });
+  wrapper.addEventListener('mouseleave', () => { hoverOpen = false; panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+
+  // Mobile / keyboard: toggle on click
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = panel.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // Close on any outside click
+  document.addEventListener('click', () => {
+    panel.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  });
+
+  // Keyboard: close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  });
+}
+
 /* ── Service Request Form ─────────────────────────────────────── */
 function initServiceRequest() {
   const form    = document.getElementById('serviceRequestForm');
@@ -1501,7 +1541,7 @@ function initServiceRequest() {
 
     // Open WhatsApp after short delay (simulate send)
     setTimeout(() => {
-      window.open(`https://wa.me/919910063557?text=${msg}`, '_blank');
+      window.open(`https://wa.me/917678273175?text=${msg}`, '_blank');
       form.reset();
       form.style.display = 'none';
       if (success) success.style.display = 'block';
