@@ -40,6 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordion();
   /* ── Animation suite ── */
   initLightReveal();
+  /* ── Animation suite v2 ── */
+  initPageTransitions();
+  initSectionHeaderStagger();
+  initHeroCollage3D();
+  initStatCardTilt();
 });
 
 function initScrollingQueue() {
@@ -1119,6 +1124,118 @@ function initLightReveal() {
       // Reset to centre so the gradient starts centred on next hover
       card.style.setProperty('--lr-x', '50%');
       card.style.setProperty('--lr-y', '50%');
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATION SUITE v2
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 1 · Page fade transition ----------------------------------- */
+function initPageTransitions() {
+  // Fade in on page load
+  document.body.style.opacity = '0';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.body.style.opacity = '1';
+    });
+  });
+
+  // Fade out before navigating away
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    // Skip anchors, mailto, tel, external, and new-tab links
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') ||
+        href.startsWith('tel:') || /^https?:\/\//.test(href) ||
+        a.target === '_blank') return;
+    e.preventDefault();
+    document.body.style.opacity = '0';
+    setTimeout(() => { window.location.href = href; }, 280);
+  });
+}
+
+/* 2 · Section-header stagger --------------------------------- */
+function initSectionHeaderStagger() {
+  const headers = document.querySelectorAll('.section-header');
+  if (!headers.length) return;
+
+  // Mark every header so the CSS can start children hidden
+  headers.forEach(h => h.classList.add('stagger-init'));
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('hdr-in');
+      } else {
+        // Remove so children re-animate on next scroll-in
+        entry.target.classList.remove('hdr-in');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  headers.forEach(h => obs.observe(h));
+}
+
+/* 3 · Hero collage 3D tilt ----------------------------------- */
+function initHeroCollage3D() {
+  // Desktop / pointer devices only
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  const hero    = document.querySelector('.hero');
+  const collage = document.querySelector('.hero-collage');
+  if (!hero || !collage) return;
+
+  let raf;
+  hero.addEventListener('mousemove', e => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const r  = hero.getBoundingClientRect();
+      const cx = r.left + r.width  / 2;
+      const cy = r.top  + r.height / 2;
+      // Map cursor offset to ±2.5 deg rotation
+      const rx = ((e.clientY - cy) / (r.height / 2)) * -2.5;
+      const ry = ((e.clientX - cx) / (r.width  / 2)) *  2.5;
+      collage.style.transition = 'transform 0.12s linear';
+      collage.style.transform  =
+        `perspective(1400px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    cancelAnimationFrame(raf);
+    collage.style.transition = 'transform 0.9s ease';
+    collage.style.transform  =
+      'perspective(1400px) rotateX(0deg) rotateY(0deg)';
+  });
+}
+
+/* 4 · Stat card 3D tilt -------------------------------------- */
+function initStatCardTilt() {
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  document.querySelectorAll('.stat-card').forEach(card => {
+    let raf;
+    card.addEventListener('mousemove', e => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r  = card.getBoundingClientRect();
+        const cx = r.left + r.width  / 2;
+        const cy = r.top  + r.height / 2;
+        const rx = ((e.clientY - cy) / (r.height / 2)) * -12;
+        const ry = ((e.clientX - cx) / (r.width  / 2)) *  12;
+        card.style.transform =
+          `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.04)`;
+        card.style.boxShadow =
+          `${-ry * 0.5}px ${rx * 0.5}px 28px rgba(76,175,80,0.22)`;
+      });
+    });
+    card.addEventListener('mouseleave', () => {
+      cancelAnimationFrame(raf);
+      card.style.transform = '';
+      card.style.boxShadow = '';
     });
   });
 }
