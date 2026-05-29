@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initScrollingQueue();
-  setActiveNav();
+  initDynamicNav();   /* builds nav, sets active state, wires dropdown */
   initMobileNav();
   initContactForm();
   initScrollProgress();
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Products page ── */
   initProductFilter();
   initProductCompare();
-  /* ── About / FAQ / Service pages ── */
+  /* ── FAQ / page-specific ── */
   initFaqAccordion();
   /* ── Animation suite ── */
   initLightReveal();
@@ -50,8 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initBlogFilter();
   initCompare();
   initServiceRequest();
-  /* ── Nav dropdown ── */
-  initNavDropdown();
 });
 
 function initScrollingQueue() {
@@ -1471,39 +1469,78 @@ function initCompare() {
   result.innerHTML = `<div class="compare-empty"><span class="cmp-empty-icon">⚗️</span>Select at least 2 instruments above and click <strong>Compare Instruments</strong>.</div>`;
 }
 
-/* ── Nav "More" Dropdown ──────────────────────────────────────── */
-function initNavDropdown() {
+/* ── Dynamic Nav Builder ──────────────────────────────────────── */
+function initDynamicNav() {
+  const nav = document.getElementById('mainNav');
+  if (!nav) return;
+
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  /* 4 fixed links always visible in the nav bar */
+  const FIXED = [
+    { href: 'index.html',    label: 'About Us'  },
+    { href: 'home.html',     label: 'Home'      },
+    { href: 'products.html', label: 'Products'  },
+    { href: 'contact.html',  label: 'Contact'   },
+  ];
+
+  /* Secondary pages — current page surfaces into the nav bar, rest go in More */
+  const EXTRA = [
+    { href: 'brands.html',          label: 'Brands'          },
+    { href: 'catalogue.html',       label: 'Catalogue'       },
+    { href: 'reagents.html',        label: 'Reagents'        },
+    { href: 'compare.html',         label: 'Compare'         },
+    { href: 'testimonials.html',    label: 'Testimonials'    },
+    { href: 'blog.html',            label: 'Blog'            },
+    { href: 'faq.html',             label: 'FAQ'             },
+    { href: 'service-request.html', label: 'Service Request' },
+  ];
+
+  const currentExtra = EXTRA.find(p => p.href === currentPage);
+  const moreItems    = EXTRA.filter(p => p.href !== currentPage);
+
+  /* Build the 4 fixed links */
+  let linksHTML = FIXED.map(p =>
+    `<a href="${p.href}" class="nav-link${p.href === currentPage ? ' active' : ''}">${p.label}</a>`
+  ).join('\n        ');
+
+  /* If we're on an extra page, surface it next to the fixed links */
+  if (currentExtra) {
+    linksHTML += `\n        <a href="${currentExtra.href}" class="nav-link active">${currentExtra.label}</a>`;
+  }
+
+  /* More dropdown — contains all extra pages except the current one */
+  const moreHTML = `
+        <div class="nav-more" id="navMore">
+          <button class="nav-link nav-more-btn" id="navMoreBtn" type="button" aria-expanded="false" aria-haspopup="true">More <span class="nav-more-chevron">&#9660;</span></button>
+          <div class="nav-more-panel">
+            ${moreItems.map(p => `<a href="${p.href}" class="nav-more-item">${p.label}</a>`).join('\n            ')}
+          </div>
+        </div>`;
+
+  nav.innerHTML = linksHTML + moreHTML;
+
+  /* Wire up dropdown interaction */
   const wrapper = document.getElementById('navMore');
   const btn     = document.getElementById('navMoreBtn');
   const panel   = wrapper ? wrapper.querySelector('.nav-more-panel') : null;
   if (!wrapper || !btn || !panel) return;
 
-  // Mark button active when current page is one of the "more" pages
-  const morePages = ['service.html','faq.html','reagents.html','compare.html',
-                     'testimonials.html','blog.html','service-request.html'];
-  const currentPage = window.location.pathname.split('/').pop() || '';
-  if (morePages.includes(currentPage)) btn.classList.add('active');
+  /* Desktop: hover open/close */
+  wrapper.addEventListener('mouseenter', () => { panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); });
+  wrapper.addEventListener('mouseleave', () => { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
 
-  let hoverOpen = false;
-
-  // Desktop: open/close on hover
-  wrapper.addEventListener('mouseenter', () => { hoverOpen = true;  panel.classList.add('open'); });
-  wrapper.addEventListener('mouseleave', () => { hoverOpen = false; panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
-
-  // Mobile / keyboard: toggle on click
+  /* Mobile / keyboard: click toggle */
   btn.addEventListener('click', e => {
     e.stopPropagation();
     const isOpen = panel.classList.toggle('open');
     btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
-  // Close on any outside click
-  document.addEventListener('click', () => {
-    panel.classList.remove('open');
-    btn.setAttribute('aria-expanded','false');
-  });
+  /* Close on outside click */
+  document.addEventListener('click', () => { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
 
-  // Keyboard: close on Escape
+  /* Close on Escape */
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
   });

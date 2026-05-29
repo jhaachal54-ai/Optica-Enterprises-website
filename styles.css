@@ -249,10 +249,11 @@ img { max-width: 100%; height: auto; }
 }
 
 /* ── "More" dropdown ────────────────────────────────────────── */
-.nav-more { position: relative; }
+.nav-more { position: relative; display: flex; align-items: stretch; }
 .nav-more-btn {
   background: none; border: 1px solid transparent; cursor: pointer;
   display: flex; align-items: center; gap: 4px; white-space: nowrap;
+  font-family: inherit; line-height: inherit;
 }
 .nav-more-btn .nav-more-chevron {
   display: inline-block; font-size: 0.7em;
