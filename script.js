@@ -1092,6 +1092,9 @@ function initColumnSlider() {
 
   // Service page service cards
   applySlider(document.querySelectorAll('.service-grid .service-card'));
+
+  // About Us page core-values cards
+  applySlider(document.querySelectorAll('.values-grid .value-card'));
 }
 
 /* ── 2. Layer Transformation — replaces .reveal on timeline items

@@ -2354,10 +2354,55 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .value-card {
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 32px 26px; text-align: center;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+  position: relative; overflow: hidden;
 }
-.value-card:hover { border-color: rgba(76,175,80,0.38); transform: translateY(-4px); }
-.value-icon { font-size: 2.1rem; display: block; margin-bottom: 14px; }
+/* Green top-strip that sweeps across on hover */
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 3px;
+  background: var(--green);
+  border-radius: 0 0 2px 2px;
+  transition: width 0.42s ease;
+}
+.value-card:hover::before { width: 100%; }
+.value-card:hover {
+  border-color: rgba(76,175,80,0.45);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 48px rgba(76,175,80,0.13);
+}
+
+/* ── Icon idle float ──────────────────────────────────────── */
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0)    scale(1);    }
+  50%       { transform: translateY(-7px) scale(1.08); }
+}
+/* ── Icon spin-pop on card hover ─────────────────────────── */
+@keyframes icon-pop {
+  0%   { transform: rotate(0deg)   scale(1);    }
+  35%  { transform: rotate(195deg) scale(1.38); }
+  65%  { transform: rotate(330deg) scale(1.18); }
+  100% { transform: rotate(360deg) scale(1);    }
+}
+.value-icon {
+  font-size: 2.1rem; display: block; margin-bottom: 14px;
+  animation: icon-float 3.2s ease-in-out infinite;
+  will-change: transform;
+}
+/* Stagger so the six icons never all peak at the same moment */
+.values-grid .value-card:nth-child(1) .value-icon { animation-delay: 0s;     }
+.values-grid .value-card:nth-child(2) .value-icon { animation-delay: 0.53s;  }
+.values-grid .value-card:nth-child(3) .value-icon { animation-delay: 1.07s;  }
+.values-grid .value-card:nth-child(4) .value-icon { animation-delay: 1.6s;   }
+.values-grid .value-card:nth-child(5) .value-icon { animation-delay: 2.13s;  }
+.values-grid .value-card:nth-child(6) .value-icon { animation-delay: 2.67s;  }
+/* Hover overrides the float with a spin-pop */
+.value-card:hover .value-icon {
+  animation: icon-pop 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
 .value-card h3 { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
 .value-card p  { font-size: 0.85rem; color: var(--text-mid); line-height: 1.8; }
 @media (max-width: 720px) { .values-grid { grid-template-columns: 1fr 1fr; } }
