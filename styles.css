@@ -3180,6 +3180,19 @@ body {
 /* ── Service Request Form ───────────────────────────────────── */
 .sr-form-wrap { max-width: 820px; margin: 0 auto; }
 
+/* Page-level heading — NOT targeted by stagger-init */
+.sr-page-header { margin-bottom: 4px; }
+.sr-page-header .section-eyebrow {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--green);
+  margin-bottom: 10px;
+}
+.sr-page-header h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
+  color: var(--text-dark); line-height: 1.25; margin-bottom: 10px;
+}
+.sr-page-header p { font-size: 0.95rem; color: var(--text-mid); }
+
 .sr-form { margin-top: 36px; }
 
 .sr-section {
@@ -3188,8 +3201,11 @@ body {
   margin-bottom: 20px;
 }
 .sr-section-title {
-  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--green); margin-bottom: 20px;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.82rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--green);
+  border-left: 3px solid var(--green); padding-left: 12px;
+  margin-bottom: 22px; line-height: 1;
 }
 
 .sr-grid {
