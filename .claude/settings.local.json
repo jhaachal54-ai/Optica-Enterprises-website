@@ -45,7 +45,14 @@
       "Bash(python process_new_photos.py)",
       "Bash(python fix_hx50_clog.py)",
       "Bash(python fix_hx50_clog_v2.py)",
-      "Bash(python process_black_bg.py)"
+      "Bash(python process_black_bg.py)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(powershell -Command '\\(Get-Content '\\\\''__TRACKED_VAR__'\\\\'' -Raw\\) -replace '\\\\''<a href=\"contact\\\\.html\">Contact</a>\\\\s*\\\\n\\\\s*</div>'\\\\'', '\\\\''<a href=\"contact.html\">Contact</a>\\\\n        <a href=\"reagents.html\">Reagents</a>\\\\n        <a href=\"compare.html\">Compare</a>\\\\n        <a href=\"testimonials.html\">Testimonials</a>\\\\n        <a href=\"blog.html\">Blog</a>\\\\n        <a href=\"service-request.html\">Service Request</a>\\\\n      </div>'\\\\'' | Set-Content '\\\\''__TRACKED_VAR__'\\\\'' -NoNewline')",
+      "Bash(node -e ' *)",
+      "Bash(python3 -)",
+      "Bash(python -)"
     ]
   }
 }
