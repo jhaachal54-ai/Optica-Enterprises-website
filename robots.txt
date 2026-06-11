@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+# Sitemap location — update the domain once the site goes live
+Sitemap: https://www.opticaenterprises.in/sitemap.xml

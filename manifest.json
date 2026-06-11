@@ -1,0 +1,32 @@
+{
+  "name": "Optica Enterprises — Diagnostic Instruments",
+  "short_name": "Optica",
+  "description": "Authorised distributor of precision diagnostic instruments in India — hematology, chemistry, immunoassay, blood gas, HbA1c, and coagulation analyzers.",
+  "start_url": "/home.html",
+  "display": "standalone",
+  "background_color": "#070b07",
+  "theme_color": "#388e3c",
+  "orientation": "any",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "Optica%20Enterprises%20Logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Optica%20Enterprises%20Logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Products",       "url": "/products.html",        "description": "Browse all diagnostic instruments" },
+    { "name": "Request a Demo", "url": "/demo-request.html",    "description": "Book a free on-site product demo" },
+    { "name": "Get a Quote",    "url": "/quote.html",           "description": "Request custom pricing" },
+    { "name": "Service Request","url": "/service-request.html", "description": "Log a breakdown or maintenance request" }
+  ],
+  "categories": ["medical", "business", "health"]
+}
