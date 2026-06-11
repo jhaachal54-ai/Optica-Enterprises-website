@@ -1,0 +1,120 @@
+# ══════════════════════════════════════════════════════════════
+#  Optica Enterprises — Apache Configuration
+#  Place this file in the root of your web hosting directory.
+#  Works on any cPanel / shared hosting running Apache.
+# ══════════════════════════════════════════════════════════════
+
+# ── Default document ─────────────────────────────────────────
+DirectoryIndex home.html index.html
+
+# ── Custom 404 error page ────────────────────────────────────
+ErrorDocument 404 /404.html
+
+# ── HTTPS redirect (uncomment after SSL certificate is active)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── www redirect (uncomment your preferred version) ──────────
+# Redirect all traffic to www:
+# RewriteEngine On
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── Gzip / Deflate compression ───────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff2
+  AddOutputFilterByType DEFLATE font/woff
+
+  # Remove browser bugs (for older browsers)
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  Header append Vary User-Agent
+</IfModule>
+
+# ── Brotli compression (if available on host) ────────────────
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/json
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+  AddOutputFilterByType BROTLI_COMPRESS font/woff2
+</IfModule>
+
+# ── Cache-Control headers ────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML — short cache (content changes more often)
+  ExpiresByType text/html                    "access plus 1 hour"
+
+  # CSS & JavaScript — medium cache with versioning via ?v= query strings
+  ExpiresByType text/css                     "access plus 1 month"
+  ExpiresByType application/javascript       "access plus 1 month"
+  ExpiresByType text/javascript              "access plus 1 month"
+
+  # Images — long cache (rarely change)
+  ExpiresByType image/png                    "access plus 6 months"
+  ExpiresByType image/jpeg                   "access plus 6 months"
+  ExpiresByType image/jpg                    "access plus 6 months"
+  ExpiresByType image/gif                    "access plus 6 months"
+  ExpiresByType image/webp                   "access plus 6 months"
+  ExpiresByType image/svg+xml               "access plus 3 months"
+  ExpiresByType image/x-icon                "access plus 1 year"
+
+  # Fonts
+  ExpiresByType font/woff2                   "access plus 1 year"
+  ExpiresByType font/woff                    "access plus 1 year"
+  ExpiresByType application/font-woff2       "access plus 1 year"
+
+  # Documents (PDFs — catalogues)
+  ExpiresByType application/pdf              "access plus 1 month"
+
+  # Data
+  ExpiresByType application/json             "access plus 0 seconds"
+  ExpiresByType text/xml                     "access plus 0 seconds"
+</IfModule>
+
+# ── Cache-Control via mod_headers (complements mod_expires) ──
+<IfModule mod_headers.c>
+  # Long-lived static assets
+  <FilesMatch "\.(png|jpg|jpeg|gif|webp|svg|ico|woff2|woff|pdf)$">
+    Header set Cache-Control "public, max-age=15552000, immutable"
+  </FilesMatch>
+
+  # CSS & JS — allow caching but validate after 1 month
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # HTML — no-store for main pages so updates propagate quickly
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+
+  # Security headers
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# ── Prevent directory listing ────────────────────────────────
+Options -Indexes
+
+# ── Protect sensitive files ──────────────────────────────────
+<FilesMatch "(^\.htaccess|\.env|\.git)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>

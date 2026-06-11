@@ -1,9 +1,36 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Service Request — Optica Enterprises</title>
+  <!-- ─── SEO & Performance ─── -->
+  <meta name="description" content="Submit a service or repair request for your diagnostic instrument. Optica Enterprises provides on-site engineer visits, calibration, and maintenance across major cities in India." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Service Request | Optica Enterprises" />
+  <meta property="og:description" content="On-site diagnostic instrument repair, calibration &amp; maintenance across India — submit a service request." />
+  <meta property="og:image" content="Optica%20Enterprises%20Logo.png" />
+  <meta property="og:site_name" content="Optica Enterprises" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Service Request | Optica Enterprises" />
+  <meta name="twitter:description" content="On-site instrument repair, calibration &amp; maintenance across India." />
+  <meta name="theme-color" content="#388e3c" />
+  <link rel="icon" type="image/png" href="Optica%20Enterprises%20Logo.png" />
+  <link rel="apple-touch-icon" href="Optica%20Enterprises%20Logo.png" />
+
+  <!-- ─── Canonical & hreflang ─── -->
+  <link rel="canonical" href="https://www.opticaenterprises.in/service-request.html" />
+  <link rel="alternate" hreflang="en-IN" href="https://www.opticaenterprises.in/service-request.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.opticaenterprises.in/home.html" />
+  <!-- ─── Preconnect to external services ─── -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://api.web3forms.com" />
+  <!-- ─── PWA Manifest ─── -->
+  <link rel="manifest" href="manifest.json" />
+  <!-- ─── Google Analytics 4 (replace G-XXXXXXXXXX with your Measurement ID from analytics.google.com) ─── -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -75,24 +102,24 @@
           <div class="sr-section-title">A &nbsp;—&nbsp; Your Details</div>
           <div class="sr-grid">
             <div class="form-group">
-              <input type="text" id="sr-name" name="name" required placeholder=" " />
-              <label for="sr-name">Full Name *</label>
+              <label for="sr-name" class="sr-field-label">Full Name *</label>
+              <input type="text" id="sr-name" name="name" class="form-control" required placeholder="e.g. Dr. Rajesh Kumar" />
             </div>
             <div class="form-group">
-              <input type="text" id="sr-org" name="organisation" required placeholder=" " />
-              <label for="sr-org">Organisation / Lab Name *</label>
+              <label for="sr-org" class="sr-field-label">Organisation / Lab Name *</label>
+              <input type="text" id="sr-org" name="organisation" class="form-control" required placeholder="e.g. City Diagnostic Centre" />
             </div>
             <div class="form-group">
-              <input type="tel" id="sr-phone" name="phone" required placeholder=" " />
-              <label for="sr-phone">Contact Number *</label>
+              <label for="sr-phone" class="sr-field-label">Contact Number *</label>
+              <input type="tel" id="sr-phone" name="phone" class="form-control" required placeholder="+91 XXXXX XXXXX" />
             </div>
             <div class="form-group">
-              <input type="email" id="sr-email" name="email" placeholder=" " />
-              <label for="sr-email">Email Address</label>
+              <label for="sr-email" class="sr-field-label">Email Address</label>
+              <input type="email" id="sr-email" name="email" class="form-control" placeholder="optional" />
             </div>
             <div class="form-group sr-full">
-              <input type="text" id="sr-addr" name="address" placeholder=" " />
-              <label for="sr-addr">Site Address / Location</label>
+              <label for="sr-addr" class="sr-field-label">Site Address / Location</label>
+              <input type="text" id="sr-addr" name="address" class="form-control" placeholder="Street, area, city" />
             </div>
           </div>
         </div>
@@ -102,6 +129,7 @@
           <div class="sr-section-title">B &nbsp;—&nbsp; Instrument Details</div>
           <div class="sr-grid">
             <div class="form-group">
+              <label for="sr-model" class="sr-field-label">Instrument Model *</label>
               <select id="sr-model" name="model" required class="sr-select">
                 <option value="" disabled selected>Select instrument model</option>
                 <optgroup label="Hematology">
@@ -131,11 +159,10 @@
                 </optgroup>
                 <option value="other">Other / Not Listed</option>
               </select>
-              <label for="sr-model" class="sr-select-label">Instrument Model *</label>
             </div>
             <div class="form-group">
-              <input type="text" id="sr-serial" name="serial" placeholder=" " />
-              <label for="sr-serial">Serial Number (if known)</label>
+              <label for="sr-serial" class="sr-field-label">Serial Number (if known)</label>
+              <input type="text" id="sr-serial" name="serial" placeholder="Optional" />
             </div>
           </div>
         </div>
@@ -145,6 +172,7 @@
           <div class="sr-section-title">C &nbsp;—&nbsp; Issue Details</div>
           <div class="sr-grid">
             <div class="form-group">
+              <label for="sr-type" class="sr-field-label">Request Type *</label>
               <select id="sr-type" name="issueType" required class="sr-select">
                 <option value="" disabled selected>Select request type</option>
                 <option>Breakdown — Instrument not working</option>
@@ -157,9 +185,9 @@
                 <option>Consumable / Reagent Query</option>
                 <option>Other</option>
               </select>
-              <label for="sr-type" class="sr-select-label">Request Type *</label>
             </div>
             <div class="form-group">
+              <label for="sr-urgency" class="sr-field-label">Urgency Level</label>
               <select id="sr-urgency" name="urgency" class="sr-select">
                 <option value="" disabled selected>Select urgency level</option>
                 <option value="urgent">🔴 Urgent — instrument down, cannot work</option>
@@ -167,17 +195,14 @@
                 <option value="standard">🟡 Standard — planned / non-critical</option>
                 <option value="low">🟢 Low — routine / when convenient</option>
               </select>
-              <label for="sr-urgency" class="sr-select-label">Urgency Level</label>
             </div>
             <div class="form-group sr-full">
-              <textarea id="sr-desc" name="description" rows="5" required placeholder=" "></textarea>
-              <label for="sr-desc">Describe the Issue *</label>
-              <span class="form-hint">Include any error codes, when the issue started, and what you have already tried.</span>
+              <label for="sr-desc" class="sr-field-label">Describe the Issue *</label>
+              <textarea id="sr-desc" name="description" rows="5" required placeholder="Include any error codes, when the issue started, and what you have already tried."></textarea>
             </div>
             <div class="form-group sr-full">
-              <textarea id="sr-avail" name="availability" rows="2" placeholder=" "></textarea>
-              <label for="sr-avail">Preferred Visit Time / Availability</label>
-              <span class="form-hint">e.g. "Weekday mornings after 10am" or "Any day except Tuesday"</span>
+              <label for="sr-avail" class="sr-field-label">Preferred Visit Time / Availability</label>
+              <textarea id="sr-avail" name="availability" rows="3" placeholder='e.g. "Weekday mornings after 10am" or "Any day except Tuesday"'></textarea>
             </div>
           </div>
         </div>
@@ -259,7 +284,12 @@
         <a href="compare.html">Compare</a>
         <a href="testimonials.html">Testimonials</a>
         <a href="blog.html">Blog</a>
+        <a href="service.html">After-Sales Service</a>
         <a href="service-request.html">Service Request</a>
+        <a href="demo-request.html">Request a Demo</a>
+        
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="quote.html">Get a Quote</a>
       </div>
     </div>
   </div>
