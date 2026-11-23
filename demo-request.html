@@ -315,6 +315,28 @@
 
 <script src="script.js"></script>
 <script>
+  // Pre-fill instrument from URL param (e.g. demo-request.html?instrument=Mispa+Count+X)
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const inst = params.get('instrument');
+    if (!inst) return;
+    const sel = document.getElementById('instrument');
+    if (!sel) return;
+    const opts = Array.from(sel.options);
+    const q = inst.toLowerCase();
+    const match = opts.find(o =>
+      o.value && (o.value.toLowerCase().includes(q) || q.includes(o.value.split(' — ')[0].toLowerCase()))
+    );
+    if (match) {
+      sel.value = match.value;
+      const hidden = document.createElement('input');
+      hidden.type = 'hidden';
+      hidden.name = 'source_product';
+      hidden.value = inst;
+      sel.closest('form').appendChild(hidden);
+    }
+  })();
+
   // Demo form submission via Web3Forms
   document.getElementById('demoForm').addEventListener('submit', async function(e) {
     e.preventDefault();

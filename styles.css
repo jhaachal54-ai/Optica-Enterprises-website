@@ -3984,6 +3984,21 @@ body.light-mode .hero-title  { color: var(--text-dark); }
 
 
 /* ══════════════════════════════════════════════════════════════
+   COMPARE TABLE — DIFF HIGHLIGHT
+   Rows where specs differ across products get a green left
+   border and subtle background so buyers spot differences fast.
+══════════════════════════════════════════════════════════════ */
+.compare-table tr.cmp-row-diff {
+  background: rgba(76, 175, 80, 0.045);
+}
+.compare-table tr.cmp-row-diff td:first-child {
+  color: var(--green-mid);
+  font-weight: 700;
+  border-left: 3px solid var(--green);
+  padding-left: 13px;
+}
+
+/* ══════════════════════════════════════════════════════════════
    PRINT STYLESHEET
 ══════════════════════════════════════════════════════════════ */
 @media print {

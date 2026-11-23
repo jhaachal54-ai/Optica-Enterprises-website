@@ -764,7 +764,21 @@ function initSplashScreen() {
 function initWhatsAppFloat() {
   const wa = document.createElement('a');
   wa.className = 'wa-float';
-  const waMsg = encodeURIComponent('Hi, I visited your website and would like to know more about your diagnostic instruments.');
+  const _waPage = window.location.pathname.split('/').pop() || 'home.html';
+  const _waMsgs = {
+    'products.html':        'Hi, I am browsing your diagnostic instruments and would like to know about pricing and availability.',
+    'catalogue.html':       'Hi, I was viewing your product catalogues and have a question. Could you help?',
+    'compare.html':         'Hi, I was comparing diagnostic instruments on your website and need guidance on choosing the right one for my lab.',
+    'reagents.html':        'Hi, I am interested in your reagent supply. Could you share pricing and availability?',
+    'service.html':         'Hi, I need to enquire about after-sales service for a diagnostic instrument.',
+    'service-request.html': 'Hi, I need to raise a service request for a diagnostic instrument.',
+    'demo-request.html':    'Hi, I would like to arrange a live demonstration of a diagnostic instrument at my facility.',
+    'faq.html':             'Hi, I have a question not covered in your FAQ. Could you assist?',
+    'blog.html':            'Hi, I read an article on your website and have a related question about diagnostic equipment.',
+    'quote.html':           'Hi, I would like to get a quote for diagnostic instruments.',
+    'contact.html':         'Hi, I visited your contact page and would like to speak with your team.',
+  };
+  const waMsg = encodeURIComponent(_waMsgs[_waPage] || 'Hi, I visited your website and would like to know more about your diagnostic instruments.');
   wa.href = `https://wa.me/917678273175?text=${waMsg}`;
   wa.target = '_blank';
   wa.rel = 'noopener noreferrer';
@@ -820,7 +834,7 @@ function initCookieBanner() {
   banner.innerHTML = `
     <p class="cookie-text">
       🍪 We use cookies to improve your experience and analyse site traffic.
-      By clicking <strong>Accept</strong> you consent to our use of cookies.
+      By clicking <strong>Accept</strong>, you consent in accordance with India's <strong>Digital Personal Data Protection Act (DPDPA) 2023</strong> and applicable data protection laws.
       <a href="privacy.html">Privacy Policy</a>
     </p>
     <div class="cookie-btns">
@@ -1493,14 +1507,19 @@ function initCompare() {
 
     let rows = '';
     ROWS.forEach(r => {
+      const vals = prods.map(p => (p[r.key] || '—').toString().trim());
+      const allSame = vals.every(v => v === vals[0]);
       let cells = `<td>${r.label}</td>`;
       prods.forEach(p => { cells += `<td>${p[r.key] || '—'}</td>`; });
-      rows += `<tr>${cells}</tr>`;
+      rows += `<tr${allSame ? '' : ' class="cmp-row-diff"'}>${cells}</tr>`;
     });
 
     // Actions row
-    let actCells = `<td>Enquire</td>`;
-    prods.forEach(() => { actCells += `<td><a href="contact.html" class="btn btn-primary" style="font-size:0.8rem;padding:8px 16px;">Get a Quote</a></td>`; });
+    let actCells = `<td>Book Demo</td>`;
+    prods.forEach(p => {
+      const instParam = encodeURIComponent(p.name);
+      actCells += `<td><a href="demo-request.html?instrument=${instParam}" class="btn btn-primary" style="font-size:0.8rem;padding:8px 16px;">Book a Demo</a></td>`;
+    });
     rows += `<tr>${actCells}</tr>`;
 
     result.innerHTML = `<div class="compare-table-wrap"><table class="compare-table"><thead><tr>${th}</tr></thead><tbody>${rows}</tbody></table></div>`;
