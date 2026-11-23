@@ -4,8 +4,8 @@
    Cache-first for static assets, network-first for HTML pages.
 ══════════════════════════════════════════════════════════════ */
 
-const CACHE_NAME   = 'optica-v2';
-const STATIC_CACHE = 'optica-static-v2';
+const CACHE_NAME   = 'optica-v3';
+const STATIC_CACHE = 'optica-static-v3';
 
 /* Pages to cache on install (shell) */
 const PAGES = [
